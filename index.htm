@@ -3,10 +3,3308 @@
 	include '../base/lc_util.php';
 ?>
 
-<h2><a href="http://3dapi.com/bs27_ani/bs27_ani.pdf">◈ASE Animation◈</a></h2>
+<!--------------------------- Body Begin ---------------------------------------->
+
+<div class="Section1">
+
+<br>
+<h1>ASE Animation</h1>
+
+<p class=MsoNormal><span lang=EN-US>3D Game</span>은 정점을 통해서 화면의 장면을 연출합니다<span
+lang=EN-US>. </span>정점들은 사람이 하나하나 손으로 만들 수도 있지만 이런 방법은 분명히 한계가 있고<span
+lang=EN-US>, </span>대부분<span lang=EN-US> 3D </span>소프트웨어이라는 것을 통해서 그래픽을 담당하는 디자이너들을
+통해서 만들어 집니다<span lang=EN-US>.</span></p>
+
+<p class=MsoNormal>맥스<span lang=EN-US>(3DS Max)</span>와<span lang=EN-US> Mayas</span>는
+게임에서 사용되는 대표적인 소프트웨어로 이들 소프트웨어는 원래 <span lang=EN-US>3D </span>애니메이션영상을 위해서 만든 소프트웨어이지만
+게임에서도 응용할 수 있어 지금까지 게임 개발에서 사용되고 있습니다<span lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>3D </span>애니메이션과<span lang=EN-US> 3D </span>게임
+둘 다<span lang=EN-US> 3D</span>를 사용하지만 애니메이션은<span lang=EN-US> 3D</span>를 화면의 <span
+lang=EN-US>Pixel</span>이라는 공간에 집중하는 반면 게임은<span lang=EN-US> Pixel </span>공간뿐만 아니라
+시간까지 대상으로 삼고 있습니다<span lang=EN-US>. </span>따라서 이러한 소프트웨어로 만든 결과물을 게임에 필요한 데이터만 추출해서
+사용합니다<span lang=EN-US>. </span>이와 같은 목적으로 만든 프로그램이 익스포터<span lang=EN-US>(Exporter)</span>입니다<span
+lang=EN-US>.</span></p>
+
+<p class=MsoNormal>익스포터는 독립적으로 실행되지 않고<span lang=EN-US>, 3D </span>소프트웨어에서 일부 기능을
+위임 받아 실행되는데 이렇게 메인 프로그램 안에서 메인 프로그램의 내용을 가지고 독립적으로 실행하는 프로그램을 플러그인<span
+lang=EN-US>(Plug-in)</span>이라 합니다<span lang=EN-US>.</span></p>
+
+<p class=MsoNormal>프로그래머가 익스포터를 직접 만들기도 하지만 잘 만들어진 공개용 익스포터를 사용하거나 맥스 등에서 제공하는 내장된
+플러그인을 사용하기도 합니다<span lang=EN-US>. </span>대표적으로<span lang=EN-US> 3DS, FBX, ASE </span>등이
+있습니다<span lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal>이들 내장된 플러그인 중에서 <span lang=EN-US>ASE(ASCII Scene Export)</span>는<span
+lang=EN-US> static 3D </span>모델과 강체<span lang=EN-US>(Rigid body) </span>애니메이션 모델
+데이터를<span lang=EN-US> text</span>로 저장해 주기 때문에 플러그인 제작에서 디버그 용으로도 자주 사용되고 특히<span
+lang=EN-US>, 3D </span>애니메이션을 처음 접하는 분들에게 무척 유용한 익스포터라 할 수 있습니다<span
+lang=EN-US>.</span></p>
+
+<p class=MsoNormal>또한 맥스<span lang=EN-US> SDK</span>를 설치하면<span lang=EN-US> ASE</span>의
+소스 코드가 포함되어 있어서<span lang=EN-US> ASE </span>자체를 자신의 프로그램에 맞게 수정하거나 문자열 형식을 이진<span
+lang=EN-US>(binary) </span>파일 형태로 저장할 수 있는 옵션 등을 추가할 수도 있습니다<span lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>ASE</span>는 독자적인 플러그인과 애니메이션 개발의 시작 단계에서 맥스
+데이터의 구조를 이해하고 자료구조를 설정하는데 많은 도움을 주기 때문에<span lang=EN-US> ASE</span>는 일종의 애니메이션과
+플러그인의 기초과정이라 볼 수 있습니다<span lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal>본 강좌는<span lang=EN-US> ASE</span>로 저장된<span lang=EN-US> 3D </span>모델
+데이터를 해석하고 화면에 렌더링 해보는 것을 목표로 하겠습니다<span lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US style='font-size:16.0pt'>1 ASE Parsing</span></p>
+
+<p class=MsoNormal><span lang=EN-US style='font-size:14.0pt'>1.1 </span><span
+style='font-size:14.0pt'>간단한 <span lang=EN-US>3D </span>모델</span></p>
+
+<p class=MsoNormal><span lang=EN-US>ASE </span>파일에 포함된 데이터를 렌더링 하기 위해서 간단한<span
+lang=EN-US> Geometry</span>를 만들어 파싱<span lang=EN-US>(Parsing)</span>을 하기 위해서 맥스<span
+lang=EN-US>(3DS Max)</span>의 <span lang=EN-US>'Create </span>창<span lang=EN-US>'
+</span>이나<span lang=EN-US> '</span>메뉴<span lang=EN-US>-&gt;Create-&gt;Standard
+Primitives'</span>에서<span lang=EN-US> &quot;pyramid&quot; </span>를 선택합니다<span
+lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US><img width=126 height=227
+src="bs27_ani.files/image001.jpg">&nbsp; <img width=307 height=227
+src="bs27_ani.files/image002.jpg"></span></p>
+
+<p class=MsoNormal><span lang=EN-US>&lt;3DS Max Geometry Tool, pyramid&gt;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal>맥스 작업에 주의할 것은<span lang=EN-US> System Unit</span>와<span
+lang=EN-US> Display Unit </span>가 다르면 작업할 때 수치와 익스포트<span lang=EN-US>(Export) </span>된
+수치가 달라 질 수 있습니다<span lang=EN-US>. '</span>메뉴<span lang=EN-US>-&gt;Customize-&gt;Units
+Setup'</span>에서 이 둘을 일치시켜 놓습니다<span lang=EN-US>. </span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US><img width=326 height=227
+src="bs27_ani.files/image003.png"></span></p>
+
+<p class=MsoNormal><span lang=EN-US>&lt;3DS Max Units Setup&gt;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal>맥스의<span lang=EN-US> Modifier</span>로<span lang=EN-US>
+Pyramid</span>의 정점 위치를 적당한 값으로 조정한 다음 이 파일을<span lang=EN-US> ASE</span>로 저장하기 위해서<span
+lang=EN-US> '</span>메뉴<span lang=EN-US>-&gt;Export'</span>를 선택합니다<span
+lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US><img width=248 height=189
+src="bs27_ani.files/image004.jpg">&nbsp;<img width=300 height=189
+src="bs27_ani.files/image005.png">&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>'ASEII Export' </span>팝업 창에서 익스포트 할 여러 데이터 선택
+중에서 그림처럼 <span lang=EN-US>'Output Options'</span>의<span lang=EN-US>&nbsp; 'Mesh
+Definition'</span>과 <span lang=EN-US>'Object Types'</span>의 <span lang=EN-US>'Geometric'
+</span>만 체크한 후<span lang=EN-US> Ok </span>버튼을 누릅니다<span lang=EN-US>.</span></p>
+
+<p class=MsoNormal>이렇게 하면<span lang=EN-US> 'Select File to Export'</span>에서 설정한
+폴더에<span lang=EN-US> ASE </span>파일이 저장됩니다<span lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US><img width=416 height=253
+src="bs27_ani.files/image006.png"></span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US><a
+href="https://github.com/3dapi/bs27_ani/raw/master/asa00_pyramid.zip">asa00_pyramid.zip</a></span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal>피라미드 대신 주전자도 만들어 봅시다<span lang=EN-US>. </span>주전자 동일한 방법으로 맥스
+파일을 만들고 익스포트를 합니다<span lang=EN-US>. </span>단<span lang=EN-US>, </span>이전의 피라미드와
+다르게 <span lang=EN-US>'Materials'</span>와<span lang=EN-US> 'Mesh Normals'</span>를
+같이 선택하고 나서 익스포트 해봅니다<span lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US><a
+href="https://github.com/3dapi/bs27_ani/raw/master/asa00_teapot.ASE">asa00_teapot.ASE</a></span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal>주전자<span lang=EN-US>(teapot) </span>파일을 열어 보면 <span
+lang=EN-US>Material</span>과 정점의<span lang=EN-US> Normal </span>벡터 정보를 포함하고 있어서 피라미드
+예제보다 상당히 많은 내용을 담고 있습니다<span lang=EN-US>. </span>여기에 애니메이션과 관련된 데이터까지 익스포트 한다면 파일의
+내용과 크기는 엄청 더 커집니다<span lang=EN-US>. </span>이렇게 내용이 많다고 너무 겁먹을 필요는 없습니다<span
+lang=EN-US>. </span>이것들은 단계적으로 하나씩 처리하면서 일정한 프로그램 형식을 적용하면 여러분들의 자료구조에 눈 깜짝할 순간에
+올라오게 되어있습니다<span lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>D&amp;C(Divide and Conquer) </span>개발 방법을 적용해서
+거대한 파일의 내용은 작은 부분으로 나누어 해석하는 것이 필요합니다<span lang=EN-US>.</span></p>
+
+<p class=MsoNormal>먼저 기본적인 텍스트 모드 파일 입<span lang=EN-US>/</span>출력과 문자열에 포함된 필요 없는
+문자 제거를 위한 함수를 준비합니다<span lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>ASE </span>파일은 텍스트로 구성되어 있습니다<span
+lang=EN-US>. ASE </span>파일을 라인 단위로 해석하기 위기 위한<span lang=EN-US> CLcAse </span>클래스는<span
+lang=EN-US> Load() </span>함수에서 데이터를 파싱<span lang=EN-US>(Parsing) </span>합니다<span
+lang=EN-US>. </span>이 함수는 파일의 핸들을 <span lang=EN-US>fopen() </span>함수로 가져오고<span
+lang=EN-US> close() </span>함수 반환하며 텍스트 형식으로 저장된 문자열을 읽어올 때 개행 문자<span
+lang=EN-US>(\n)</span>까지 라인 단위로 읽어오고 이를 해석하기 위해 <span lang=EN-US>fgets() </span>함수와
+<span lang=EN-US>sscanf() </span>함수를 활용합니다<span lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:blue'>INT</span><span lang=EN-US> </span><span lang=EN-US
+style='color:blue'>CLcAse</span><span lang=EN-US>::</span><span lang=EN-US
+style='color:#880000'>Load</span><span lang=EN-US>()</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>…</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>FILE</span><span lang=EN-US>*&nbsp;&nbsp; fp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:green'>// ASE </span><span style='color:green'>파일 포인터</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>FILE</span><span lang=EN-US>*&nbsp;&nbsp; fpCnf;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:green'>// </span><span style='color:green'>확인용 함수 포인터</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>char</span><span lang=EN-US> sLine[</span><span
+lang=EN-US style='color:#A000A0'>MAX_PARSE_LINE</span><span lang=EN-US>];&nbsp;&nbsp; </span><span
+lang=EN-US style='color:green'>// </span><span style='color:green'>읽기 버퍼</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:green'>&nbsp;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fp&nbsp;
+&nbsp;= </span><span lang=EN-US style='color:#880000'>fopen</span><span
+lang=EN-US>(m_sFile, </span><span lang=EN-US style='color:#A000A0'>&quot;rt&quot;</span><span
+lang=EN-US>);</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; fpCnf=
+</span><span lang=EN-US style='color:#880000'>fopen</span><span lang=EN-US>(</span><span
+lang=EN-US style='color:#A000A0'>&quot;Model/PyramidConfirm.txt&quot;</span><span
+lang=EN-US>, </span><span lang=EN-US style='color:#A000A0'>&quot;wt&quot;</span><span
+lang=EN-US>);</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>while</span><span lang=EN-US>(!</span><span
+lang=EN-US style='color:#880000'>feof</span><span lang=EN-US>(fp))</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:#880000'>fgets</span><span lang=EN-US>(sLine, </span><span
+lang=EN-US style='color:#A000A0'>MAX_PARSE_LINE</span><span lang=EN-US>, fp);</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>int</span><span lang=EN-US> iLen = </span><span
+lang=EN-US style='color:#A000A0'>strlen</span><span lang=EN-US>(sLine);</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>if</span><span lang=EN-US>(iLen&lt;</span><span
+lang=EN-US style='color:red'>3</span><span lang=EN-US>)</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>continue</span><span lang=EN-US>;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:#880000'>LcStr_Trim</span><span lang=EN-US>(sLine);&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span lang=EN-US style='color:green'>// </span><span style='color:green'>공백<span
+lang=EN-US>, </span>탭<span lang=EN-US>, </span>개행 제거</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:green'>&nbsp;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:green'>//</span><span style='color:green'>확인용 파일에 공백을 제거한
+문자열 쓰기</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:#880000'>fprintf</span><span lang=EN-US>(fpCnf, </span><span
+lang=EN-US style='color:#A000A0'>&quot;%s\n&quot;</span><span lang=EN-US>,
+sLine);</span></p>
+
+<p class=MsoNormal><span lang=EN-US>…</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>fgets() </span>함수에서 라인 단위로 읽은 문자열은 개행 문자까지 포함되어
+있습니다<span lang=EN-US>. LcStr_Trim() </span>함수는 문자열의 왼쪽<span lang=EN-US>, </span>오른쪽
+문자열의 공백<span lang=EN-US>, </span>탭<span lang=EN-US>, </span>그리고 개행 문자를 삭제한 후 반환하는
+함수 입니다<span lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:blue'>void</span><span lang=EN-US> </span><span lang=EN-US
+style='color:#880000'>LcStr_Trim</span><span lang=EN-US>(</span><span
+lang=EN-US style='color:blue'>char</span><span lang=EN-US>* sBuf)</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>…</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>iLen = </span><span
+lang=EN-US style='color:#880000'>strlen</span><span lang=EN-US>(sBuf);</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>…</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:green'>// </span><span style='color:green'>문자 <span lang=EN-US>\r
+\n </span>제거</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:blue'>for</span><span lang=EN-US>(i=iLen-</span><span lang=EN-US
+style='color:red'>1</span><span lang=EN-US>; i&gt;=</span><span lang=EN-US
+style='color:red'>0</span><span lang=EN-US>; --i)</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>{</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>char</span><span lang=EN-US>* p = sBuf + i;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>if</span><span lang=EN-US>( </span><span
+lang=EN-US style='color:#A000A0'>'\n'</span><span lang=EN-US> == *p || </span><span
+lang=EN-US style='color:#A000A0'>'\r'</span><span lang=EN-US> == *p)</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *(sBuf
++ i) = </span><span lang=EN-US style='color:#A000A0'>'\0'</span><span
+lang=EN-US>;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:blue'>…</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>}</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:green'>// </span><span style='color:green'>오른쪽 공백<span lang=EN-US>,
+</span>탭<span lang=EN-US>(\t) </span>제거</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>…</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:blue'>for</span><span lang=EN-US>(i=iLen-</span><span lang=EN-US
+style='color:red'>1</span><span lang=EN-US>; i&gt;=</span><span lang=EN-US
+style='color:red'>0</span><span lang=EN-US>; --i)</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>{</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>char</span><span lang=EN-US>* p = sBuf + i;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>if</span><span lang=EN-US>( </span><span
+lang=EN-US style='color:#A000A0'>' '</span><span lang=EN-US> == *p || </span><span
+lang=EN-US style='color:#A000A0'>'\t'</span><span lang=EN-US> == *p)</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>continue</span><span lang=EN-US>;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *(sBuf
++ i+</span><span lang=EN-US style='color:red'>1</span><span lang=EN-US>) = </span><span
+lang=EN-US style='color:#A000A0'>'\0'</span><span lang=EN-US>;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>break</span><span lang=EN-US>;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>}</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>…</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:green'>// </span><span style='color:green'>왼쪽 공백<span lang=EN-US>,
+</span>탭<span lang=EN-US>(\t) </span>제거</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:blue'>for</span><span lang=EN-US>(i=</span><span lang=EN-US
+style='color:red'>0</span><span lang=EN-US>; i &lt; iLen; ++i)</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>{</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>char</span><span lang=EN-US>* p = sT + i;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>if</span><span lang=EN-US>( </span><span
+lang=EN-US style='color:#A000A0'>' '</span><span lang=EN-US> == *p || </span><span
+lang=EN-US style='color:#A000A0'>'\t'</span><span lang=EN-US> == *p)</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>continue</span><span lang=EN-US>;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>break</span><span lang=EN-US>;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>}</span></p>
+
+<p class=MsoNormal><span lang=EN-US>…</span></p>
+
+<p class=MsoNormal>다음 예제를 실행해 보면<span lang=EN-US> ASE </span>파일이 저장된 폴더에<span
+lang=EN-US> ASE</span>에서 공백과 탭이 제거된 자료가 저장된<span lang=EN-US> txt </span>파일을 볼 수
+있습니다<span lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US><a
+href="https://github.com/3dapi/bs27_ani/raw/master/asa01_text_read.zip">asa01_text_read.zip</a></span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US style='font-size:14.0pt'>1.2 </span><span
+style='font-size:14.0pt'>구문 해석 방법</span></p>
+
+<p class=MsoNormal>지금까지 텍스트 파일의 입출력<span lang=EN-US>, </span>문자열 시작과 끝에서 공백<span
+lang=EN-US>, </span>탭<span lang=EN-US>, </span>개행 문자들을 제거해 보았습니다<span
+lang=EN-US>. </span>이제부터 본격적으로<span lang=EN-US> ASE</span>를 해석할 차례입니다<span
+lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>ASE </span>파일을 살펴 보면 각 라인의 내용이 <span
+lang=EN-US>{Keyword, Values}</span>의 형식으로 되어 있음을 직관적으로 알 수 있습니다<span
+lang=EN-US>. </span>또한 <span lang=EN-US>Values</span>는 없는 것도 있고<span
+lang=EN-US>, </span>하나만 있는 것도 있고 복수의 형태로 구성되어 있는 것도 있음을 볼 수 있고 이 모든 값들은 전적으로 <span
+lang=EN-US>Keyword</span>에 따라 달라짐을 알 수 있습니다<span lang=EN-US>. </span>이것은 <span
+lang=EN-US>Keyword</span>에 대해서 문장을 해석해야 함을 간접적으로 이야기 하고 있고 각 문장에 따라 코딩을 해야 함을 의미합니다<span
+lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal>문장의 끝에 <span lang=EN-US>'{' </span>기호가 있는 경우<span
+lang=EN-US>, </span>자료구조 블록의 시작을 알리고 블록의 끝에서는 <span lang=EN-US>'}' </span>로 지정하고
+있음을 볼 수 있습니다<span lang=EN-US>. </span>이렇게 중 괄호로 표현된 부분은 자료구조를 선언하고 나서 <span
+lang=EN-US>while</span>과 같은<span lang=EN-US> loop </span>문으로 처리함을 의미하며 아마도 이 부분이<span
+lang=EN-US> ASE</span>파싱에서 가장 난이도가 있는 부분이기도 합니다<span lang=EN-US>. </span>이 부분은 자료구조에서
+더 살펴보기로 하고 먼저 프로그램 구현을 위해서 다음과 같이 해석을 위한 키를 저장할 수 있는 구조체를 작성하고<span lang=EN-US>
+ASE</span>에 저장되어 있는 키들을 선언합니다<span lang=EN-US>.</span></p>
+
+<p class=MsoNormal>키의 크기는<span lang=EN-US> 64byte </span>정도면 충분합니다<span
+lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:blue'>typedef</span><span lang=EN-US> </span><span lang=EN-US
+style='color:blue'>char</span><span lang=EN-US> AseKey[</span><span lang=EN-US
+style='color:red'>64</span><span lang=EN-US>];&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:green'>// String Keword</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>…</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:blue'>AseKey</span><span lang=EN-US>&nbsp; Keywords[] =&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:green'>// Parsing Keyword</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>{</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:#A000A0'>&quot;*GEOMOBJECT {&quot;</span><span
+lang=EN-US>,</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:#A000A0'>&quot;*NODE_NAME&quot;</span><span lang=EN-US>&nbsp;&nbsp; ,,</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:#A000A0'>&quot;*NODE_TM {&quot;</span><span lang=EN-US>&nbsp;&nbsp; ,</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:#A000A0'>&quot;*MESH {&quot;</span><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ,</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:#A000A0'>&quot;*MESH_NUMVERTEX&quot;</span><span
+lang=EN-US>,</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>…</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal>이렇게 선언한 키들을 가지고 문장을 해석할 때 키에 해당 하는 데이터 해석을 작성하면 됩니다<span
+lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US style='color:blue'>if</span><span
+lang=EN-US>(</span><span lang=EN-US style='color:red'>0</span><span lang=EN-US>
+== </span><span lang=EN-US style='color:#880000'>_strnicmp</span><span
+lang=EN-US>(sLine, Keywords[</span><span lang=EN-US style='color:red'>0</span><span
+lang=EN-US>] , </span><span lang=EN-US style='color:#880000'>strlen</span><span
+lang=EN-US>(Keywords[</span><span lang=EN-US style='color:red'>0</span><span
+lang=EN-US>])) )</span></p>
+
+<p class=MsoNormal><span lang=EN-US>{</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:green'>// </span><span style='color:green'>데이터 해석</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; …</span></p>
+
+<p class=MsoNormal><span lang=EN-US>}</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal>키 비교에 대한 별도의 함수를 두는 것도 좋은 방법입니다<span lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:blue'>BOOL</span><span lang=EN-US> </span><span lang=EN-US
+style='color:#880000'>CompareAseKey</span><span lang=EN-US>(</span><span
+lang=EN-US style='color:blue'>char</span><span lang=EN-US>* val, </span><span
+lang=EN-US style='color:blue'>char</span><span lang=EN-US>* key)</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>{</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>return</span><span lang=EN-US> (</span><span
+lang=EN-US style='color:red'>0</span><span lang=EN-US> == </span><span
+lang=EN-US style='color:#880000'>_strnicmp</span><span lang=EN-US>(val, key, </span><span
+lang=EN-US style='color:#880000'>strlen</span><span lang=EN-US>(key) ) ) ? </span><span
+lang=EN-US style='color:red'>1</span><span lang=EN-US>: </span><span
+lang=EN-US style='color:red'>0</span><span lang=EN-US>;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>}</span></p>
+
+<p class=MsoNormal><span lang=EN-US>…</span></p>
+
+<p class=MsoNormal><span lang=EN-US style='color:blue'>if</span><span
+lang=EN-US>(</span><span lang=EN-US style='color:#880000'>CompareAseKey</span><span
+lang=EN-US>(sLine, Keywords[</span><span lang=EN-US style='color:red'>1</span><span
+lang=EN-US>]) )</span></p>
+
+<p class=MsoNormal><span lang=EN-US>{</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:green'>// </span><span style='color:green'>데이터 해석</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; …</span></p>
+
+<p class=MsoNormal><span lang=EN-US>}</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>Values</span>에서 유의해 볼 것은 겹 따옴표<span
+lang=EN-US>(&quot; &quot;)</span>로 구성되어 있는 값이 있다는 것도 잊지 않아야 합니다<span
+lang=EN-US>. </span>이렇게 큰 따옴표로 묶인 부분은 파일 이름이나 맥스에서 작업한 지오메트리<span lang=EN-US>(Geometry)</span>의
+오브젝트 이름과 같은 문자열 데이터로써 공백이 포함되는 경우도 있으므로 단순하게<span lang=EN-US> sscanf()</span>로 읽게
+되면 낭패를 볼 수 있습니다<span lang=EN-US>. </span>따라서 큰 따옴표 처리를 위한 함수를 만들어야 합니다<span
+lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:green'>// </span><span style='color:green'>겹따옴표 안의 문자열 읽기</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:blue'>void</span><span lang=EN-US> </span><span lang=EN-US
+style='color:#880000'>LcStr_Quot</span><span lang=EN-US>(</span><span
+lang=EN-US style='color:blue'>char</span><span lang=EN-US>* sDst, </span><span
+lang=EN-US style='color:blue'>const</span><span lang=EN-US> </span><span
+lang=EN-US style='color:blue'>char</span><span lang=EN-US>* sSrc)</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>…</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>int</span><span lang=EN-US> iLen = </span><span
+lang=EN-US style='color:#880000'>strlen</span><span lang=EN-US>(sSrc);</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>char</span><span lang=EN-US>* p = (</span><span
+lang=EN-US style='color:blue'>char</span><span lang=EN-US>*)sSrc;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>while</span><span lang=EN-US>( </span><span
+lang=EN-US style='color:red'>0</span><span lang=EN-US> != *p)</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>if</span><span lang=EN-US>( </span><span
+lang=EN-US style='color:#A000A0'>'\&quot;'</span><span lang=EN-US> == *p
+&amp;&amp; </span><span lang=EN-US style='color:red'>0</span><span lang=EN-US>
+== bStrt)</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; bStrt
+= </span><span lang=EN-US style='color:red'>1</span><span lang=EN-US>;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>else</span><span lang=EN-US> </span><span
+lang=EN-US style='color:blue'>if</span><span lang=EN-US>( </span><span
+lang=EN-US style='color:#A000A0'>'\&quot;'</span><span lang=EN-US> == *p
+&amp;&amp; </span><span lang=EN-US style='color:red'>1</span><span lang=EN-US>
+== bStrt)</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *(sDst
++ nBgn) = </span><span lang=EN-US style='color:red'>0</span><span lang=EN-US>;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>break</span><span lang=EN-US>;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>if</span><span lang=EN-US>(nBgn&gt;=</span><span
+lang=EN-US style='color:red'>0</span><span lang=EN-US> &amp;&amp; </span><span
+lang=EN-US style='color:red'>1</span><span lang=EN-US>== bStrt)</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *(sDst
++ nBgn) = *p;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>if</span><span lang=EN-US>(</span><span
+lang=EN-US style='color:red'>1</span><span lang=EN-US>== bStrt)</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ++nBgn;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ++p;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>…</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US><a
+href="https://github.com/3dapi/bs27_ani/raw/master/asa02_text_parse.zip">asa02_text_parse.zip</a></span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US style='font-size:14.0pt'>1.3 </span><span
+style='font-size:14.0pt'>자료구조</span></p>
+
+<p class=MsoNormal>어느 정도 코드를 갖추었으면 자료구조를 만들어야 합니다<span lang=EN-US>. ASE </span>파일의
+자료구조는 크게<span lang=EN-US> Scene, Material(</span>재질<span lang=EN-US>), Geometry
+Object(GEOMOBJECT)</span>로 구성되어 있습니다<span lang=EN-US>. Scene </span>자료구조는 애니메이션의
+프레임과 시간이 저장되어 있습니다<span lang=EN-US>. Material </span>자료구조에는 조명에 필요한 재질<span
+lang=EN-US>, </span>정점 좌표에 적용이 되는 텍스처<span lang=EN-US>, </span>라이팅 등등의 정보들이 저장되어
+있습니다<span lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal>가장 중요한 것은<span lang=EN-US> GEOMOBJECT </span>자료구조 입니다<span
+lang=EN-US>. </span>이 자료구조에는 맥스에서 작업할 때 지정된 자신의 노드 이름과 링크가 설정이 되었을 때 부모 노드의 이름이
+있습니다<span lang=EN-US>. </span>또한 장면을 구성하기 위한 월드행렬<span lang=EN-US>, </span>정점의 인덱스<span
+lang=EN-US>, </span>정점의 위치<span lang=EN-US>, </span>법선<span lang=EN-US>, </span>텍스처
+좌표 등에 해당하는 메쉬 정보 그리고<span lang=EN-US>, </span>애니메이션에 관련된 프레임에 따라 위치<span
+lang=EN-US>, </span>이동<span lang=EN-US>, </span>크기변환에 대한 정보<span lang=EN-US>, </span>머티리얼<span
+lang=EN-US>(Material) </span>인덱스 등이 저장되어 있습니다<span lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>ASE </span>파일에서 자료구조를 구성하는 가장 쉬운 방법은<span
+lang=EN-US> ASE</span>에 저장된 키와 값을 이용해서 프로그램 언어로 바꿀 수 있도록 먼저 의사 코드<span
+lang=EN-US>(psudo-code) ASE </span>파일을 복사해서 직접 작성해 보는 것입니다<span lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>struct SCENE {</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; int
+SCENE_FIRSTFRAME&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;0</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; int
+SCENE_LASTFRAME&nbsp;&nbsp;&nbsp; &nbsp;100</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; int
+SCENE_FRAMESPEED&nbsp;&nbsp; &nbsp;&nbsp;30</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; int
+SCENE_TICKSPERFRAME 160</span></p>
+
+<p class=MsoNormal><span lang=EN-US>};</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>struct GEOMOBJECT {</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; char
+NODE_NAME[64] &quot;Pyramid001&quot;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; struct
+MESH</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; int
+MESH_NUMVERTEX 6</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; int
+MESH_NUMFACES 8</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; VEC3
+MESH_VERTEX[0]&nbsp;&nbsp;&nbsp;&nbsp; 0.0000&nbsp;&nbsp; 0.0000&nbsp; 60.0000</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; VEC3
+MESH_VERTEX[1]&nbsp;&nbsp; -40.0000 -40.0000&nbsp;&nbsp; 0.0000</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; VEC3
+MESH_VERTEX[2]&nbsp;&nbsp;&nbsp; 40.0000 -40.0000&nbsp;&nbsp; 0.0000</span></p>
+
+<p class=MsoNormal><span lang=EN-US>…</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; IDX3
+MESH_FACE[0]&nbsp;&nbsp;&nbsp; 0&nbsp;&nbsp; 1&nbsp;&nbsp; 2</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; IDX3
+MESH_FACE[1]&nbsp;&nbsp;&nbsp; 0&nbsp;&nbsp; 2&nbsp;&nbsp; 3</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; IDX3
+MESH_FACE[2]&nbsp;&nbsp;&nbsp; 0&nbsp;&nbsp; 3&nbsp;&nbsp; 4</span></p>
+
+<p class=MsoNormal><span lang=EN-US>…</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&lt;</span>자료구조 구성<span lang=EN-US>: <a
+href="https://github.com/3dapi/bs27_ani/raw/master/asa03_struct.zip">asa03_struct.zip</a></span>의<span
+lang=EN-US> Model/asa00_pyramid_struct.ase&gt;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal>이렇게 초벌로 작업한 내용을<span lang=EN-US> c</span>언어 등 프로그램 언어로 바꾸고 <span
+lang=EN-US>Ase </span>클래스를 완성합니다<span lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:blue'>class</span><span lang=EN-US> </span><span lang=EN-US
+style='color:blue'>CLcAse</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>…</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>typedef</span><span lang=EN-US> </span><span
+lang=EN-US style='color:blue'>char</span><span lang=EN-US> AseKey[</span><span
+lang=EN-US style='color:red'>64</span><span lang=EN-US>];&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:green'>// ASE Keyword</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:green'>&nbsp;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>struct</span><span lang=EN-US> </span><span
+lang=EN-US style='color:blue'>AseVtx</span><span lang=EN-US>&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:green'>// ASE Mesh</span><span style='color:green'>의<span
+lang=EN-US> x, y, z</span>를 읽기위한 구조체</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>FLOAT</span><span lang=EN-US> x, y, z;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; };</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>struct</span><span lang=EN-US> </span><span
+lang=EN-US style='color:blue'>AseFce</span><span lang=EN-US>&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:green'>// ASE Face</span><span style='color:green'>의<span
+lang=EN-US> a, b, c</span>를 읽기위한 구조체</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>WORD</span><span lang=EN-US> a, b, c;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; };</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>struct</span><span lang=EN-US> </span><span
+lang=EN-US style='color:blue'>AseGeo</span><span lang=EN-US>&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:green'>// ASE Geometry</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>char</span><span lang=EN-US>&nbsp;&nbsp;&nbsp; sNodeName[</span><span
+lang=EN-US style='color:red'>64</span><span lang=EN-US>]; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:green'>// Node </span><span style='color:green'>이름</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>int</span><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp; iNumVtx;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:green'>// Vertex</span><span style='color:green'>의 수</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>int</span><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp; iNumFce;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:green'>// Index</span><span style='color:green'>의 수</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>AseVtx</span><span lang=EN-US>* pLstVtx; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:green'>// Vertex </span><span style='color:green'>리스트</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>AseFce</span><span lang=EN-US>* pLstFce; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:green'>// Face </span><span style='color:green'>리스트</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; };</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:blue'>protected</span><span lang=EN-US>:</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>char</span><span lang=EN-US>&nbsp;&nbsp;&nbsp; m_sFile[</span><span
+lang=EN-US style='color:#A000A0'>MAX_PATH</span><span lang=EN-US>];&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:green'>// </span><span style='color:green'>모델 파일</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:green'>&nbsp;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>INT</span><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp; m_iNGeo;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span lang=EN-US style='color:green'>//
+Geometry </span><span style='color:green'>개수</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>AseGeo</span><span lang=EN-US>* m_pGeo; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:green'>// Geometry</span></p>
+
+<p class=MsoNormal><span lang=EN-US>…</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>Ase </span>클래스가 완성이 되면<span lang=EN-US>
+Load() </span>함수에서<span lang=EN-US> ASE </span>파일의<span lang=EN-US>
+&quot;{&quot;, &quot;}&quot; </span>안의 데이터는 동적으로 할당하고<span lang=EN-US> loop</span>문으로
+해석하면 자료구조의 큰 골격은 완성이 됩니다<span lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US style='color:blue'>INT</span><span
+lang=EN-US> </span><span lang=EN-US style='color:blue'>CLcAse</span><span
+lang=EN-US>::</span><span lang=EN-US style='color:#880000'>Load</span><span
+lang=EN-US>()</span></p>
+
+<p class=MsoNormal><span lang=EN-US>…</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:blue'>if</span><span lang=EN-US>(</span><span lang=EN-US
+style='color:#880000'>CompareAseKey</span><span lang=EN-US>(sLine, </span><span
+lang=EN-US style='color:#A000A0'>&quot;*MESH_NUMVERTEX&quot;</span><span
+lang=EN-US>) )</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>{</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>INT</span><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; iNVx;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:#880000'>sscanf</span><span lang=EN-US>(sLine, </span><span
+lang=EN-US style='color:#A000A0'>&quot;%*s %d&quot;</span><span lang=EN-US>,
+&amp;iNVx);</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; m_pGeo[nGeoIdx].iNumVtx
+= iNVx;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; m_pGeo[nGeoIdx].pLstVtx
+= </span><span lang=EN-US style='color:blue'>new</span><span lang=EN-US> </span><span
+lang=EN-US style='color:blue'>CLcAse</span><span lang=EN-US>::AseVtx[iNVx];</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>}</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:blue'>if</span><span lang=EN-US>(</span><span lang=EN-US
+style='color:#880000'>CompareAseKey</span><span lang=EN-US>(sLine, </span><span
+lang=EN-US style='color:#A000A0'>&quot;*MESH_NUMFACES&quot;</span><span
+lang=EN-US>) )</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>…</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:#880000'>sscanf</span><span lang=EN-US>(sLine, </span><span
+lang=EN-US style='color:#A000A0'>&quot;%*s %d&quot;</span><span lang=EN-US>,
+&amp;iNIx);</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; m_pGeo[nGeoIdx].iNumFce
+= iNIx;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; m_pGeo[nGeoIdx].pLstFce
+= </span><span lang=EN-US style='color:blue'>new</span><span lang=EN-US> </span><span
+lang=EN-US style='color:blue'>CLcAse</span><span lang=EN-US>::AseFce[iNIx];</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>…</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:blue'>if</span><span lang=EN-US>(</span><span lang=EN-US
+style='color:#880000'>CompareAseKey</span><span lang=EN-US>(sLine, </span><span
+lang=EN-US style='color:#A000A0'>&quot;*MESH_VERTEX_LIST {&quot;</span><span
+lang=EN-US>) )</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>{</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>while</span><span lang=EN-US>(!</span><span
+lang=EN-US style='color:#880000'>feof</span><span lang=EN-US>(fp))</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:#880000'>fgets</span><span lang=EN-US>(sLine, </span><span
+lang=EN-US style='color:#A000A0'>MAX_PARSE_LINE</span><span lang=EN-US>, fp);</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>…</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>if</span><span lang=EN-US>(</span><span
+lang=EN-US style='color:#880000'>CompareAseKey</span><span lang=EN-US>(sLine, </span><span
+lang=EN-US style='color:#A000A0'>&quot;*MESH_VERTEX&quot;</span><span
+lang=EN-US>) )</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>…</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:#880000'>sscanf</span><span lang=EN-US>(sLine, </span><span
+lang=EN-US style='color:#A000A0'>&quot;%*s %d %f %f %f&quot;</span><span
+lang=EN-US>, &amp;nIdx, &amp;x, &amp;y, &amp;z);</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; m_pGeo[nGeoIdx].pLstVtx[nIdx].x
+= x;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; m_pGeo[nGeoIdx].pLstVtx[nIdx].y
+= y;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; m_pGeo[nGeoIdx].pLstVtx[nIdx].z
+= z;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>…</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:blue'>if</span><span lang=EN-US>(</span><span lang=EN-US
+style='color:#880000'>CompareAseKey</span><span lang=EN-US>(sLine, </span><span
+lang=EN-US style='color:#A000A0'>&quot;*MESH_FACE_LIST {&quot;</span><span
+lang=EN-US>) )</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>{</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>while</span><span lang=EN-US>(!feof(fp))</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:#880000'>fgets</span><span lang=EN-US>(sLine, </span><span
+lang=EN-US style='color:#A000A0'>MAX_PARSE_LINE</span><span lang=EN-US>, fp);</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>…</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>if</span><span lang=EN-US>(</span><span
+lang=EN-US style='color:#880000'>CompareAseKey</span><span lang=EN-US>(sLine, </span><span
+lang=EN-US style='color:#A000A0'>&quot;*MESH_FACE&quot;</span><span lang=EN-US>)
+)</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>…</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:#880000'>sscanf</span><span lang=EN-US>(sLine, </span><span
+lang=EN-US style='color:fuchsia'>&quot;%*s %d: %*s %d %*s %d %*s %d&quot;</span><span
+lang=EN-US>, &amp;nIdx, &amp;a, &amp;b,&nbsp; &amp;c);</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; m_pGeo[nGeoIdx].pLstFce[nIdx].a
+= a;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; m_pGeo[nGeoIdx].pLstFce[nIdx].b
+= b;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; m_pGeo[nGeoIdx].pLstFce[nIdx].c
+= c;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>…</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US><a
+href="https://github.com/3dapi/bs27_ani/raw/master/asa03_struct.zip">asa03_struct.zip</a></span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US style='font-size:14.0pt'>1.4 </span><span
+style='font-size:14.0pt'>뷰어와 피라미드</span></p>
+
+<p class=MsoNormal><span lang=EN-US>ASE</span>에서 데이터를 읽고 해석 하는 기본 작업은 거의 다 끝이 났습니다<span
+lang=EN-US>. </span>이제부터 화면에 장면을 연출하면서 코드를 보강 해야 합니다<span lang=EN-US>. </span>먼저
+준비해야 할 것은<span lang=EN-US> ASE </span>모듈을 테스트 할 수 있는 테스트 드라이버<span lang=EN-US>(test
+driver: </span>모듈 테스트 프로그램<span lang=EN-US>)</span>가 필요합니다<span lang=EN-US>. </span>테스트
+드라이버는 키보드<span lang=EN-US>, </span>카메라<span lang=EN-US>, </span>그리고 오브젝트의 크기를 눈으로
+확인할 수 있는 그리드<span lang=EN-US>(Grid)</span>가 보이는 구성합니다<span lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US><img border=0 width=268 height=189
+src="bs27_ani.files/image007.jpg"></span></p>
+
+<p class=MsoNormal><span lang=EN-US><a
+href="https://github.com/3dapi/bs27_ani/raw/master/asa04_viewer_basic.zip">asa04_viewer_basic.zip</a></span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal>피라미드<span lang=EN-US> ASE </span>파일에서 해석한 버텍스와 인덱스를 렌더링하면 맥스와
+다르게 그림과 같이 피라미드가 누워있는 모습을 볼 수 있습니다<span lang=EN-US>. </span>이것은 맥스가 오른손 좌표계를 사용하면서<span
+lang=EN-US> Up </span>방향의 축을<span lang=EN-US> z</span>축으로 사용하고 있기 때문입니다<span
+lang=EN-US>. </span>따라서 이 부분을<span lang=EN-US> D3D</span>에 맞게 변경해야 합니다<span
+lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US><img border=0 width=268 height=189
+src="bs27_ani.files/image008.jpg"></span></p>
+
+<p class=MsoNormal><span lang=EN-US>&lt;D3D </span>환경으로 변경하지 않은<span
+lang=EN-US> ASE&gt;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>ASE </span>해석에서 정점의 위치를 읽는 경우 맥스의<span
+lang=EN-US> Y </span>축은<span lang=EN-US> D3D</span>의<span lang=EN-US> Z</span>축이
+되고 맥스의<span lang=EN-US> Y</span>축은<span lang=EN-US> D3D</span>의<span
+lang=EN-US> Z</span>축이 됩니다<span lang=EN-US>. </span>따라서 다음과 같이<span lang=EN-US>
+y</span>와 <span lang=EN-US>z</span>를 읽어야 합니다<span lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:blue'>INT</span><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp; nIdx=</span><span
+lang=EN-US style='color:red'>0</span><span lang=EN-US>;</span></p>
+
+<p class=MsoNormal><span lang=EN-US style='color:blue'>FLOAT</span><span
+lang=EN-US>&nbsp;&nbsp; x=</span><span lang=EN-US style='color:red'>0</span><span
+lang=EN-US>.F, y=</span><span lang=EN-US style='color:red'>0</span><span
+lang=EN-US>.F, z=</span><span lang=EN-US style='color:red'>0</span><span
+lang=EN-US>.F;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:#880000'>sscanf</span><span lang=EN-US>(sLine, </span><span
+lang=EN-US style='color:fuchsia'>&quot;%*s %d %f %f %f&quot;</span><span
+lang=EN-US>, &amp;nIdx, &amp;x, &amp;y, &amp;z);</span></p>
+
+<p class=MsoNormal><span lang=EN-US>m_pGeo[nGeoIdx].pLstVtx[nIdx].x = x;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>m_pGeo[nGeoIdx].pLstVtx[nIdx].y = z;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>m_pGeo[nGeoIdx].pLstVtx[nIdx].z = y;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal>맥스는 오른손 좌표계를 사용하고<span lang=EN-US> DirectX</span>는 왼손 좌표계를 사용합니다<span
+lang=EN-US>. </span>삼각형을 그리는 순서가 맥스는 시계 반대방향<span lang=EN-US>(CCW: Count Clock
+Wise)</span>로 그리고<span lang=EN-US> DirectX</span>는 시계 방향<span lang=EN-US>(CW:
+Clock Wise)</span>로 그립니다<span lang=EN-US>. </span>따라서 <span lang=EN-US>CW</span>로
+그릴 수 있도록 다음과 같이<span lang=EN-US> b</span>와<span lang=EN-US> c</span>를 교환해줍니다<span
+lang=EN-US>..</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:blue'>INT</span><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp; nIdx=</span><span
+lang=EN-US style='color:red'>0</span><span lang=EN-US>, a=</span><span
+lang=EN-US style='color:red'>0</span><span lang=EN-US>, b=</span><span
+lang=EN-US style='color:red'>0</span><span lang=EN-US>, c=</span><span
+lang=EN-US style='color:red'>0</span><span lang=EN-US>;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>sscanf(sLine, </span><span lang=EN-US
+style='color:fuchsia'>&quot;%*s&nbsp; %d:&nbsp; %*s&nbsp; %d&nbsp; %*s&nbsp; %d&nbsp;
+%*s&nbsp; %d&quot;</span><span lang=EN-US>, &amp;nIdx, &amp;a, &amp;b, &amp;c);</span></p>
+
+<p class=MsoNormal><span lang=EN-US>m_pGeo[nGeoIdx].pLstFce[nIdx].a = a;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>m_pGeo[nGeoIdx].pLstFce[nIdx].b = c;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>m_pGeo[nGeoIdx].pLstFce[nIdx].c = b;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US><img border=0 width=321 height=227
+src="bs27_ani.files/image009.jpg"></span></p>
+
+<p class=MsoNormal><span lang=EN-US>&lt;D3D</span>환경으로 변경된<span lang=EN-US> ASE
+</span>해석<span lang=EN-US>:<a
+href="https://github.com/3dapi/bs27_ani/raw/master/asa05_viewer_pyramid.zip">asa05_viewer_pyramid.zip</a>&gt;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US style='font-size:14.0pt'>1.5 </span><span
+style='font-size:14.0pt'>추상화</span></p>
+
+<p class=MsoNormal><span lang=EN-US>ASE</span>를 해석하는 코드는 애니메이션과 오브젝트에 대한 처리가 정교해질수록
+코드가 점점 커지게 되어 있습니다<span lang=EN-US>. </span>따라서 이런 부분을 라이브러리로 만들어 놓고 사용한다면<span
+lang=EN-US> ASE </span>코드를 만드는 개발자나 이 코드를 게임에 적용하는 메인 프로그래머에게 적용에 대해서 번잡하지 않게 만들어
+작업의 효율을 높일 수 있습니다<span lang=EN-US>.</span></p>
+
+<p class=MsoNormal>라이브러리는 단순히 코드의 집합입니다<span lang=EN-US>. </span>라이브러리를 쉽게 사용하고
+기능 추가<span lang=EN-US>, </span>버그 해결 등 유지보수를 원활히 하려면 단순 클래스 보다 이를 추상화하는 것이 좋습니다<span
+lang=EN-US>. </span>그래서 우리는 지금까지 사용한 클래스를 다음과 같이 모델 인터페이스를 최상위로 정의하고<span
+lang=EN-US> CLcAse </span>클래스는 이를 상속해서 <span lang=EN-US>ASE</span>를 처리하는 구조로 변경합니다<span
+lang=EN-US>. </span>또한 객체의 생성은<span lang=EN-US> LcAse_Create() </span>함수와 같이<span
+lang=EN-US> new </span>연산자가 아닌 함수가 담당하는 것으로 정의합니다<span lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:blue'>struct</span><span lang=EN-US> </span><span lang=EN-US
+style='color:blue'>ILcMdl</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>{</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>virtual</span><span lang=EN-US> ~</span><span
+lang=EN-US style='color:blue'>ILcMdl</span><span lang=EN-US>(){};</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>virtual</span><span lang=EN-US> </span><span
+lang=EN-US style='color:blue'>INT</span><span lang=EN-US>&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:#880000'>Create</span><span lang=EN-US>(</span><span
+lang=EN-US style='color:blue'>void</span><span lang=EN-US>* pDev, </span><span
+lang=EN-US style='color:blue'>void</span><span lang=EN-US>* sFile)=</span><span
+lang=EN-US style='color:red'>0</span><span lang=EN-US>;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>virtual</span><span lang=EN-US> </span><span
+lang=EN-US style='color:blue'>void</span><span lang=EN-US>&nbsp;&nbsp; </span><span
+lang=EN-US style='color:#880000'>Destroy</span><span lang=EN-US>()=</span><span
+lang=EN-US style='color:red'>0</span><span lang=EN-US>;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>virtual</span><span lang=EN-US> </span><span
+lang=EN-US style='color:blue'>INT</span><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:#880000'>FrameMove</span><span lang=EN-US>()=</span><span
+lang=EN-US style='color:red'>0</span><span lang=EN-US>;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>virtual</span><span lang=EN-US> </span><span
+lang=EN-US style='color:blue'>void</span><span lang=EN-US>&nbsp;&nbsp; </span><span
+lang=EN-US style='color:#880000'>Render</span><span lang=EN-US>()=</span><span
+lang=EN-US style='color:red'>0</span><span lang=EN-US>;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>};</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:blue'>INT</span><span lang=EN-US> </span><span lang=EN-US
+style='color:#880000'>LcAse_Create</span><span lang=EN-US>(</span><span
+lang=EN-US style='color:blue'>char</span><span lang=EN-US>* sCmd</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;,
+</span><span lang=EN-US style='color:blue'>ILcMdl</span><span lang=EN-US>**
+pData&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span lang=EN-US style='color:green'>//
+</span><span style='color:green'>생성된 반환 객체</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;,
+</span><span lang=EN-US style='color:blue'>void</span><span lang=EN-US>* pDev&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:green'>// Device</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;,
+</span><span lang=EN-US style='color:blue'>void</span><span lang=EN-US>* sName =
+</span><span lang=EN-US style='color:#A000A0'>NULL</span><span lang=EN-US>&nbsp; </span><span
+lang=EN-US style='color:green'>// </span><span style='color:green'>모델 파일 이름</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>…</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:blue'>class</span><span lang=EN-US> </span><span lang=EN-US
+style='color:blue'>CLcAse</span><span lang=EN-US> : </span><span lang=EN-US
+style='color:blue'>public</span><span lang=EN-US> ILcMdl</span></p>
+
+<p class=MsoNormal><span lang=EN-US>…</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal>지금까지 테스트 드라이버 프로그램에서 객체 생성을 클래스로 한 것을 <span lang=EN-US>LcAse_Create()
+</span>함수로 생성하도록 합니다<span lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:blue'>class</span><span lang=EN-US> </span><span lang=EN-US
+style='color:blue'>CMain</span><span lang=EN-US> : </span><span lang=EN-US
+style='color:blue'>public</span><span lang=EN-US> </span><span lang=EN-US
+style='color:blue'>CD3DApplication</span></p>
+
+<p class=MsoNormal><span lang=EN-US>…</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ILcMdl*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; m_pMdl;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>…</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:blue'>HRESULT</span><span lang=EN-US> </span><span lang=EN-US
+style='color:blue'>CMain</span><span lang=EN-US>::</span><span lang=EN-US
+style='color:#880000'>Init</span><span lang=EN-US>()</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; …</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>if</span><span lang=EN-US>( </span><span
+lang=EN-US style='color:#A000A0'>FAILED</span><span lang=EN-US>( </span><span
+lang=EN-US style='color:#880000'>LcAse_Create</span><span lang=EN-US>(</span><span
+lang=EN-US style='color:#A000A0'>NULL</span><span lang=EN-US>, &amp;m_pMdl,
+m_pd3dDevice, </span><span lang=EN-US style='color:fuchsia'>&quot;Model/asa00_pyramid.ASE&quot;</span><span
+lang=EN-US>)))</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>return</span><span lang=EN-US> -</span><span
+lang=EN-US style='color:red'>1</span><span lang=EN-US>;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>…</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal>객체는<span lang=EN-US> CMain::Destroy() </span>함수에서 해제하고<span
+lang=EN-US>, </span>렌더링은<span lang=EN-US> CMain::Render() </span>함수에서 처리합니다<span
+lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:blue'>HRESULT</span><span lang=EN-US> </span><span lang=EN-US
+style='color:blue'>CMain</span><span lang=EN-US>::</span><span lang=EN-US
+style='color:#880000'>Render</span><span lang=EN-US>()</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; …</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>if</span><span lang=EN-US>( </span><span
+lang=EN-US style='color:#A000A0'>FAILED</span><span lang=EN-US>(
+m_pd3dDevice-&gt;</span><span lang=EN-US style='color:#880000'>BeginScene</span><span
+lang=EN-US>() ) )</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>return</span><span lang=EN-US> -</span><span
+lang=EN-US style='color:red'>1</span><span lang=EN-US>;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; …</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:#A000A0'>SAFE_RENDER</span><span lang=EN-US>(&nbsp;&nbsp; m_pMdl&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; );</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; …</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; m_pd3dDevice-&gt;</span><span
+lang=EN-US style='color:#880000'>EndScene</span><span lang=EN-US>();</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:blue'>HRESULT</span><span lang=EN-US> </span><span lang=EN-US
+style='color:blue'>CMain</span><span lang=EN-US>::</span><span lang=EN-US
+style='color:#880000'>Destroy</span><span lang=EN-US>()</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>…</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:#A000A0'>SAFE_DELETE</span><span lang=EN-US>(&nbsp;&nbsp; m_pMdl&nbsp; );</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>…</span></p>
+
+<p class=MsoNormal><span lang=EN-US><a
+href="https://github.com/3dapi/bs27_ani/raw/master/asa06_object.zip">asa06_object.zip</a></span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal>간단하게 최상위 클래스로 만들고 이를 구현하는 방법을 살펴보았습니다<span lang=EN-US>. </span>다시
+강조 하지만<span lang=EN-US> ASE </span>모델을 추상화하면 개발 및 유지 보수가 좋아집니다<span lang=EN-US>.
+ASE</span>와 같이 복잡한 코드를 작업할 때 객체의 추상화는 반드시 필요하다고 할 수 있습니다<span lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US style='font-size:14.0pt'>1.6 Geometries</span></p>
+
+<p class=MsoNormal>캐릭터<span lang=EN-US>, </span>건물 등 게임에서 사용하는 오브젝트들은 대부분 여러 지오메트리로
+구성되어 있습니다<span lang=EN-US>.</span>특히 애니메이션 오브젝트들은 하나의 메쉬로 구성되어 있지는 않습니다<span
+lang=EN-US>. </span>이것은 오브젝트를 개별적으로 만들어서 하나로 합치기 때문입니다<span lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>ASE</span>는<span lang=EN-US> Geometry</span>의
+개수를 기록하지 않습니다<span lang=EN-US>. </span>따라서 다음과 같이<span lang=EN-US> while </span>루프를
+이용해서 지오메트리의 개수를 찾아야 합니다<span lang=EN-US>. </span>지오메트리의 숫자를 파악하는 동안 파일 포인터가 옮겨졌기
+때문에 파일 포인터를 반드시 처음으로 이동시켜야 합니다<span lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US style='color:green'>// </span><span
+style='color:green'>지오메트리를 찾아서 개수를 정한다<span lang=EN-US>.</span></span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:blue'>while</span><span lang=EN-US>(!</span><span lang=EN-US
+style='color:#880000'>feof</span><span lang=EN-US>(fp))</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>{</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; …</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>if</span><span lang=EN-US>(</span><span
+lang=EN-US style='color:red'>0</span><span lang=EN-US> == </span><span
+lang=EN-US style='color:#880000'>_strnicmp</span><span lang=EN-US>(sLine, </span><span
+lang=EN-US style='color:fuchsia'>&quot;*GEOMOBJECT {&quot;</span><span
+lang=EN-US>, </span><span lang=EN-US style='color:#880000'>strlen</span><span
+lang=EN-US>(</span><span lang=EN-US style='color:fuchsia'>&quot;*GEOMOBJECT {&quot;</span><span
+lang=EN-US>) ))</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ++m_nGeo;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; …</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>}</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>…</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:green'>// </span><span style='color:green'>파일 포인터를 처음으로 이동한다<span
+lang=EN-US>.</span></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='color:#880000'>fseek</span><span
+lang=EN-US>(fp, </span><span lang=EN-US style='color:red'>0</span><span
+lang=EN-US>, </span><span lang=EN-US style='color:#A000A0'>SEEK_SET</span><span
+lang=EN-US>);</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal>지오메트리의 숫자를 파악하고 하고 나서 지오메트리에 대한 메모리를 확보하고 지오메트리의 포인터를 얻어서<span
+lang=EN-US> ASE </span>데이터를 해석합니다<span lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US style='color:green'>//</span><span
+style='color:green'>지오메트리 생성</span></p>
+
+<p class=MsoNormal><span lang=EN-US>m_pGeo = </span><span lang=EN-US
+style='color:blue'>new</span><span lang=EN-US> </span><span lang=EN-US
+style='color:blue'>AseGeo</span><span lang=EN-US>[m_nGeo];</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:blue'>INT</span><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp; nGeoIdx
+= -</span><span lang=EN-US style='color:red'>1</span><span lang=EN-US>;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:blue'>AseGeo</span><span lang=EN-US>* pGeo&nbsp;&nbsp;&nbsp; = </span><span
+lang=EN-US style='color:#A000A0'>NULL</span><span lang=EN-US>;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:blue'>while</span><span lang=EN-US>(!</span><span lang=EN-US
+style='color:#880000'>feof</span><span lang=EN-US>(fp))</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>…</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>if</span><span lang=EN-US>(</span><span
+lang=EN-US style='color:red'>0</span><span lang=EN-US> == </span><span
+lang=EN-US style='color:#880000'>_strnicmp</span><span lang=EN-US>(sLine, </span><span
+lang=EN-US style='color:fuchsia'>&quot;*GEOMOBJECT {&quot;</span><span
+lang=EN-US>, </span><span lang=EN-US style='color:#880000'>strlen</span><span
+lang=EN-US>(</span><span lang=EN-US style='color:fuchsia'>&quot;*GEOMOBJECT {&quot;</span><span
+lang=EN-US>) ))</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ++nGeoIdx;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:green'>//</span><span style='color:green'>해석할 지오메트리 포인터</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pGeo
+= &amp;m_pGeo[nGeoIdx];</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>…</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:green'>//</span><span style='color:green'>해당 지오메트리에 대한<span
+lang=EN-US> ASE </span>해석</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pGeo-&gt;…</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US><img border=0 width=321 height=227
+src="bs27_ani.files/image010.jpg"></span></p>
+
+<p class=MsoNormal><span lang=EN-US>&lt;</span>단일 지오메트리<span lang=EN-US> - <a
+href="https://github.com/3dapi/bs27_ani/raw/master/asa11_geo_single.zip">asa11_geo_single.zip</a>&gt;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal>피라미드<span lang=EN-US>, torus, </span>주전자 등을 테스트 했다면 게임에서 사용하는
+모델을 올려봅니다<span lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US><img border=0 width=321 height=227
+src="bs27_ani.files/image011.jpg"></span></p>
+
+<p class=MsoNormal><span lang=EN-US>&lt;</span>다중 지오메트리<span lang=EN-US> - <a
+href="https://github.com/3dapi/bs27_ani/raw/master/asa12_geo_multi.zip">asa12_geo_multi.zip</a>&gt;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US style='font-size:14.0pt'>1.7 </span><span
+style='font-size:14.0pt'>텍스처</span></p>
+
+<p class=MsoNormal>애니메이션이 없는 오브젝트의 마지막 단계로 텍스처 적용이 남아 있습니다<span lang=EN-US>. ASE
+</span>파일 구조 안에서 텍스처에 대한 정보는 머티리얼<span lang=EN-US>(Material: </span>재질<span
+lang=EN-US>) </span>안에 저장되어 있습니다<span lang=EN-US>. </span>맥스의 머티리얼은 광원에 대한 정보와 정점에서
+사용하는 텍스처에 대한 파일 정보가 저장되어 있습니다<span lang=EN-US>.</span></p>
+
+<p class=MsoNormal>머티리얼은 여러 하위 머티리얼<span lang=EN-US>(</span>서브 머티리얼<span
+lang=EN-US>:sub material)</span>을 가질 수 있습니다<span lang=EN-US>. </span>이것은 지오메트리가
+하나의 메쉬로 구성되어 있지만 각각의 정점은 다른 머티리얼을 참고 할 수 있도록 맥스가 구성되어 있기 때문입니다<span lang=EN-US>.
+</span>이에 대한 예는 각각 다른 머티리얼을 가진 두 이상의 오브젝트를 하나로 합칠 때 발생합니다<span lang=EN-US>. </span>따라서
+프로그래머는 이에 대해서도 처리 해야 하지만 이 강좌에서는 이것을 다루기에 내용이 많으므로 모든 각각의 오브젝트는 단 하나의 머티리얼만 사용한다는
+가정을 하고 서브 머티리얼은 략하겠습니다<span lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>UV</span>좌표는 화면의 왼쪽 상단이<span lang=EN-US>
+(0,0), </span>오른쪽 하단이<span lang=EN-US> (1,1) </span>좌표입니다<span lang=EN-US>. ST </span>좌표는
+화면의 왼쪽 하단이<span lang=EN-US> (0,0), </span>오른쪽 상단이<span lang=EN-US>(1,1) </span>인
+수학에서 사용하는<span lang=EN-US> 2</span>차원 좌표계로 구성되어 있는 좌표계입니다<span lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>DirectX</span>는<span lang=EN-US> UV </span>좌표를
+사용하지만 맥스 <span lang=EN-US>ST </span>좌표를 사용합니다<span lang=EN-US>. </span>따라서 맥스의 텍스처
+좌표는<span lang=EN-US> DirectX</span>에 맞게 변경이 되야 하는데 <span lang=EN-US>Y</span>에 대한
+값을 다음과 같이 변경하면 됩니다<span lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US style='color:fuchsia'>Y = 1.0F &#8211; Y</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal>맥스는 텍스처 좌표를 <span lang=EN-US>3</span>차원 좌표 <span lang=EN-US>UVW</span>를
+사용합니다<span lang=EN-US>. D3D</span>의 게임은<span lang=EN-US> x, y</span>만 필요하기 때문에 앞의
+두 개만 해석해서 사용하면 됩니다<span lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:blue'>INT&nbsp;&nbsp;&nbsp;&nbsp; </span><span lang=EN-US>nIdx=</span><span
+lang=EN-US style='color:red'>0</span><span lang=EN-US>;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:blue'>FLOAT</span><span lang=EN-US>&nbsp;&nbsp; u=</span><span
+lang=EN-US style='color:red'>0</span><span lang=EN-US style='color:red'>.</span><span
+lang=EN-US style='color:red'> 0</span><span lang=EN-US style='color:red'>F</span><span
+lang=EN-US>, v=</span><span lang=EN-US style='color:red'>0</span><span
+lang=EN-US style='color:red'>.</span><span lang=EN-US style='color:red'> 0</span><span
+lang=EN-US style='color:red'>F</span><span lang=EN-US>, w=</span><span
+lang=EN-US style='color:red'>0</span><span lang=EN-US style='color:red'>.</span><span
+lang=EN-US style='color:red'> 0</span><span lang=EN-US style='color:red'>F</span><span
+lang=EN-US>;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:#880000'>sscanf</span><span lang=EN-US>(sLine, </span><span
+lang=EN-US style='color:fuchsia'>&quot;%*s %d %f %f %f&quot;</span><span
+lang=EN-US>, &amp;nIdx, &amp;u, &amp;v, &amp;w);</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>pGeo-&gt;pLstTvtx[nIdx].u
+= u;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>pGeo-&gt;pLstTvtx[nIdx].v
+= </span><span lang=EN-US style='color:red'>1</span><span lang=EN-US>.</span><span
+lang=EN-US style='color:red'>0f </span><span lang=EN-US>- v;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'>맥스는 정점 버퍼와 텍스처에 대한<span
+lang=EN-US> Tvertex </span>버퍼를 개별적으로 가지고 있습니다<span lang=EN-US>. </span>이것은 하나의 정점을
+여러 텍스처 좌표가 공유하도록 해서 정점의 숫자를 줄일 수 있게 됩니다<span lang=EN-US>. </span>따라서 정점의 위치 좌표 개수는
+텍스처의 좌표 보다 같거나 작습니다<span lang=EN-US>.</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'>이러한 이유로 삼각형을 구성하는 인덱스 또한 따로 가지고 있습니다<span
+lang=EN-US>. </span>위치에 대한 인덱스<span lang=EN-US>(Face)</span>와 텍스처 좌표에 대한 인덱스<span
+lang=EN-US>(T-Face)</span>의 숫자는 거기에 저장된 인덱스는 반드시 일치하지는 않습니다<span lang=EN-US>. </span>따라서<span
+lang=EN-US> T-Face</span>에 대한 내용을 따로 읽어와야 합니다<span lang=EN-US>.</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'>이렇게 다르다면 어떻게 렌더링에 대한 인덱스와 정점의 위치
+그리고 텍스처 좌표를 구성해야 해야 할까요<span lang=EN-US>?</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US><img border=0
+width=449 height=154 id="개체 2" src="bs27_ani.files/image012.png"></span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&lt;ASE</span>의<span
+lang=EN-US> Face</span>와<span lang=EN-US> T-face</span>의 비교<span lang=EN-US>&gt;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>ASE</span>의<span
+lang=EN-US> Face</span>와<span lang=EN-US> T-face</span>의 인덱스 내용은 다르지만 전체 개수는 일치합니다<span
+lang=EN-US>. </span>또한 리스트에서 참조하고 있는 정점의 번호와 텍스처 좌표 번호는 항상 일치 합니다<span
+lang=EN-US>. </span>예를 들어 그림을 보면<span lang=EN-US> Face </span>리스트<span
+lang=EN-US> 480 </span>사용하고 있는 정점의 인덱스<span lang=EN-US> 245</span>는<span
+lang=EN-US>&nbsp; 481, 482</span>에도 사용하고 있고 이러한 패턴은<span lang=EN-US> T-face</span>에서도
+그대로<span lang=EN-US> 480,481, 482</span>에서 사용하고 있음을 볼 수 있습니다<span lang=EN-US>.</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'>이러한 패턴을 기억하고 프로그램을 작성해 봅시다<span
+lang=EN-US>. </span>먼저<span lang=EN-US> T-face </span>해석으로 <span lang=EN-US>T-Face</span>도
+정점의 인덱스와 마찬가지로 렌더링의<span lang=EN-US> CW</span>를 위해 <span lang=EN-US>b</span>와<span
+lang=EN-US> c</span>를 교환 합니다<span lang=EN-US>.</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:blue'>INT</span><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp; nIdx=</span><span
+lang=EN-US style='color:red'>0</span><span lang=EN-US>, a=</span><span
+lang=EN-US style='color:red'>0</span><span lang=EN-US>, b=</span><span
+lang=EN-US style='color:red'>0</span><span lang=EN-US>, c=</span><span
+lang=EN-US style='color:red'>0</span><span lang=EN-US>;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:#880000'>sscanf</span><span lang=EN-US>(sLine, </span><span
+lang=EN-US style='color:fuchsia'>&quot;%*s %d %d %d %d&quot;</span><span
+lang=EN-US>, &amp;nIdx, &amp;a, &amp;b, &amp;c);</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>pGeo-&gt;pLstTfce[nIdx].a
+= a;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>pGeo-&gt;pLstTfce[nIdx].b
+= c;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>pGeo-&gt;pLstTfce[nIdx].c
+= b;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'>맥스는 여러 텍스처 좌표가 하나의 정점 위치를 공유할 수 있기
+때문에 정점 위치를 가지고 렌더링의 정점을 정하는 것이 아니라 텍스처 좌표를 가지고 정점을 구성해야 합니다<span lang=EN-US>.</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'>즉<span lang=EN-US>, </span>최종 정점의
+숫자는 텍스처 좌표 숫자와 일치 시키고<span lang=EN-US>, </span>삼각형의 인덱스 구성도<span lang=EN-US>
+T-Face</span>로 정해서 렌더링 합니다<span lang=EN-US>. </span>이에 따라<span lang=EN-US>
+T-vertex</span>를 중심을 위치를 <span lang=EN-US>vertex</span>에서 복사해서 사용해야 합니다<span
+lang=EN-US>.</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:green'>//1. </span><span style='color:green'>렌더링 버퍼<span
+lang=EN-US>(</span></span><span lang=EN-US style='color:green'>pVtxR</span><span
+lang=EN-US style='color:green'> )</span><span style='color:green'>에 <span
+lang=EN-US>UV</span>를 먼저 설정</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:blue'>for</span><span lang=EN-US>(</span><span lang=EN-US
+style='color:blue'>int</span><span lang=EN-US> j=</span><span lang=EN-US
+style='color:red'>0</span><span lang=EN-US>; j&lt; pGeo-&gt;nTvtx; ++j)</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>{</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pVtxR[j].u
+= pGeo-&gt;pTvtx[j].u;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pVtxR[j].v
+= pGeo-&gt;pTvtx[j].v;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>}</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:green'>//2. </span><span style='color:green'>렌더링 버퍼<span
+lang=EN-US>(</span></span><span lang=EN-US style='color:green'>pVtxR</span><span
+lang=EN-US style='color:green'> )</span><span style='color:green'>에 위치<span
+lang=EN-US>(x,y,z)</span>를 결정</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:blue'>for</span><span lang=EN-US>(</span><span lang=EN-US
+style='color:blue'>int</span><span lang=EN-US> n=</span><span lang=EN-US
+style='color:red'>0</span><span lang=EN-US>; n&lt;pGeo-&gt;nFce; ++n)</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>{</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>INT</span><span lang=EN-US> nT = </span><span
+lang=EN-US style='color:red'>0</span><span lang=EN-US>; </span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>INT </span><span lang=EN-US>nV = </span><span
+lang=EN-US style='color:red'>0</span><span lang=EN-US>;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; nT
+= pGeo-&gt;pTFce[n].a; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:green'>// T-face U V </span><span style='color:green'>인덱스를
+가져온다<span lang=EN-US>.</span></span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; nV
+= pGeo-&gt;pFce[n].a;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:green'>// Vertex </span><span style='color:green'>버퍼에서 정점의
+위치를 가져온다<span lang=EN-US>.</span></span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pVtxR[nT].p
+= pGeo-&gt;pVtx[nV].p;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; nT
+= pGeo-&gt;pTFce[n].b;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; nV
+= pGeo-&gt;pFce[n].b;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pVtxR[nT].p
+= pGeo-&gt;pVtx[nV].p;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; nT
+= pGeo-&gt;pTFce[n].c;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; nV
+= pGeo-&gt;pFce[n].c;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pVtxR[nT].p
+= pGeo-&gt;pVtx[nV].p;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>}</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US><img border=0 width=294 height=208
+src="bs27_ani.files/image013.jpg"></span></p>
+
+<p class=MsoNormal><span lang=EN-US>&lt;</span>텍스처<span lang=EN-US>:<a
+href="https://github.com/3dapi/bs27_ani/raw/master/asa13_texture.zip">asa13_texture.zip</a>&gt;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US style='font-size:16.0pt'>2 Rigid body
+Animation</span></p>
+
+<p class=MsoNormal>애니메이션은 여러 분류가 있는데 그 중에서 지오메트리를 구성하고 있는 정점들 사이의 간격이 변하지 않는 강체<span
+lang=EN-US>(Rigid body) </span>애니메이션과 피부처럼 접히거나 늘어나는 스키닝<span lang=EN-US>(Skinning)
+</span>애니메이션으로 구분할 수 있습니다<span lang=EN-US>.</span></p>
+
+<p class=MsoNormal>강체 애니메이션은 지오메트리의 모든 정점들에 대해서 같은 값을 가지는 행렬이 적용 됩니다<span
+lang=EN-US>. </span>스키닝은 지오메트리를 같이 구성하지만 행렬의 값은 개별적으로 설정할 수 있습니다<span
+lang=EN-US>. </span>과거에는 스키닝을 지원하는 그래픽 카드가 워낙 비싸서 게임에서는 강체 애니메이션을 주로 사용했습니다<span
+lang=EN-US>. </span>지금은 가격이 많이 내려 캐릭터에 대한 애니메이션은 대부분 스키닝을 이용합니다<span
+lang=EN-US>.</span></p>
+
+<p class=MsoNormal>강체 애니메이션은 관절에서 폴리곤이 갈라지는 부분만 뺀다면 스키닝보다 구현과 속도 면에서 우수 합니다<span
+lang=EN-US>. </span>따라서 기계 팔과 움직임은 강체 애니메이션을 적용한다면 오히려 속도 향상의 이득이 있습니다<span
+lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>ASE</span>는 강체 애니메이션을 지원합니다<span
+lang=EN-US>. </span>그리고 강체 애니메이션을 구현하고 맥스 데이터의 행렬 연산을 이해한다면 스키닝을 배우는데 좀 더 쉽게 배울
+수 있습니다<span lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal>이 장에서는<span lang=EN-US> ASE</span>에 포함된 애니메이션 데이터를 해석하고 이를 구현해
+보도록 하겠습니다<span lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US style='font-size:14.0pt'>2.1 </span><span
+style='font-size:14.0pt'>변환 행렬<span lang=EN-US>(TM: Transform Matrix)</span></span></p>
+
+<p class=MsoNormal>애니메이션이 없는<span lang=EN-US> ASE </span>구조는 해석하기가 쉽지만 애니메이션이 있는
+경우 지오메트리에 포함된 각각의 행렬과 이들의 연관 관계의 이해가 중요합니다<span lang=EN-US>.</span></p>
+
+<p class=MsoNormal>맥스의<span lang=EN-US> 3D </span>장면은 그림과 같이 나무 자료구조<span
+lang=EN-US>(Tree)</span>의 집합인 숲<span lang=EN-US>(Forest) </span>자료구조로 구성되어 있습니다<span
+lang=EN-US>. </span>오브젝트의 각각의 노드를 우리는 지오메트리로 알고 있고<span lang=EN-US>, ASE </span>익스포터는
+루트 노드부터 깊이 우선 순회<span lang=EN-US>(Depth First Search)</span>로 각각의 지오메트리의 자료를 파일로
+저장합니다<span lang=EN-US>.</span></p>
+
+<p class=MsoNormal>또한 지오메트리에 포함된 행렬은 지역행렬이 아닌 월드행렬입니다<span lang=EN-US>. </span>따라서
+애니메이션을 구현할 때 이들 월드행렬을 지역행렬로 바꾸어서 루트부터 행렬을 갱신하고 자식 노드로 이를 반복하는 구조로 애니메이션을 구현해야 됩니다<span
+lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US><img border=0 width=315 height=335 id="개체 3"
+src="bs27_ani.files/image014.png"></span></p>
+
+<p class=MsoNormal><span lang=EN-US>&lt;</span>나무 자료구조<span lang=EN-US>(Tree) </span>구조로
+구성된 숲 자료구조<span lang=EN-US>(Forest)&gt;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal>애니메이션은 노드<span lang=EN-US>(</span>지오메트리<span lang=EN-US>)</span>의
+월드행렬을 구하는 일입니다<span lang=EN-US>. </span>지역행렬을 갱신하고 부모 행렬과 곱하면 자신의 월드행렬이 되므로 오브젝트를
+구성하는 모든 객체들은 각자 자기의 모델 좌표계에 대한 행렬<span lang=EN-US>, </span>즉 자신의 지역행렬 값을 가지고 있어야
+합니다<span lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>ASE</span>파일의 <span lang=EN-US>*NODE_TM{} </span>안에
+오브젝트의 월드행렬에 대한 정보가 있습니다<span lang=EN-US>. D3D </span>환경에 맞추기 위해서 정점 해석에서<span
+lang=EN-US> z</span>와 <span lang=EN-US>y</span>을 바꾸었듯이 이들 행렬도<span lang=EN-US>
+y</span>축과<span lang=EN-US> z</span>축에 대한 교환이 필요합니다<span lang=EN-US>. </span>따라서
+행렬을 읽고<span lang=EN-US> 2</span>열<span lang=EN-US>, 3</span>열의 교환 뿐만<span
+lang=EN-US> 2</span>행<span lang=EN-US>, 3</span>행의 교환도 필요합니다<span lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal>예를 들어 다음과 같은 값으로<span lang=EN-US> NODE_TM</span>이 구성되어 있는 경우를
+해석해 봅시다<span lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US style='color:fuchsia'>*TM_ROW0 -0.1225&nbsp;
+-0.3713&nbsp;&nbsp; 0.9204</span></p>
+
+<p class=MsoNormal><span lang=EN-US style='color:fuchsia'>*TM_ROW1 -0.4945&nbsp;
+-0.7812&nbsp; -0.3810</span></p>
+
+<p class=MsoNormal><span lang=EN-US style='color:fuchsia'>*TM_ROW2&nbsp; 0.8605&nbsp;
+-0.5018&nbsp; -0.0879</span></p>
+
+<p class=MsoNormal><span lang=EN-US style='color:fuchsia'>*TM_ROW3 -0.0443&nbsp;
+-0.2532&nbsp; 10.2929</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal>이것은<span lang=EN-US> DirectX</span>의 <span lang=EN-US
+style='color:blue'>D3DXMATRIX </span>행렬로 변환을 할 때 다음과 같이<span lang=EN-US>
+TM_ROW1 </span>부분과<span lang=EN-US> TM_ROW2 </span>부분을 교환합니다<span lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>-0.1225 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -0.3713 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+0.9204</span></p>
+
+<p class=MsoNormal><span lang=EN-US style='color:blue'>&nbsp;</span><span
+lang=EN-US style='color:fuchsia'>0.8605&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -0.5018&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -0.0879</span></p>
+
+<p class=MsoNormal><span lang=EN-US style='color:fuchsia'>-0.4945 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -0.7812 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -0.3810</span></p>
+
+<p class=MsoNormal><span lang=EN-US>-0.0443 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -0.2532 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 10.2929</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal>다음으로<span lang=EN-US> 2 </span>번째와 <span lang=EN-US>3 </span>번째
+열을 교환합니다<span lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>-0.1225 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:fuchsia'>0.9204&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -0.3713</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;0.8605 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:fuchsia'>-0.087&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -0.50189</span></p>
+
+<p class=MsoNormal><span lang=EN-US>-0.4945&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:fuchsia'>-0.381&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -0.78120</span></p>
+
+<p class=MsoNormal><span lang=EN-US>-0.0443&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:fuchsia'>10.292&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -0.25329</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal>마지막으로<span lang=EN-US> 4</span>열의 값을<span lang=EN-US> 0, 0,
+0, 1&nbsp; </span>의 값으로 채우면 이 지오메트리의 월드행렬을 얻게 됩니다<span lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>-0.1225&nbsp;&nbsp;&nbsp; 0.9204&nbsp; -0.3713&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span lang=EN-US style='color:fuchsia'>0</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;0.8605&nbsp;&nbsp; -0.087&nbsp;&nbsp;
+-0.50189&nbsp;&nbsp;&nbsp;&nbsp; </span><span lang=EN-US style='color:fuchsia'>0</span></p>
+
+<p class=MsoNormal><span lang=EN-US>-0.4945&nbsp;&nbsp; -0.381&nbsp;&nbsp; -0.78120&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span lang=EN-US style='color:fuchsia'>0</span></p>
+
+<p class=MsoNormal><span lang=EN-US>-0.0443&nbsp;&nbsp; 10.292&nbsp;&nbsp; -0.25329&nbsp;&nbsp;&nbsp;&nbsp;
+</span><span lang=EN-US style='color:fuchsia'>1</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:blue'>while</span><span lang=EN-US>(…)</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>…</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>if</span><span lang=EN-US>(</span><span
+lang=EN-US style='color:#880000'>CompareAseKey</span><span lang=EN-US>(sLine,
+Keywords[</span><span lang=EN-US style='color:#A000A0'>TM_ROW1</span><span
+lang=EN-US>]) )</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>…</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pGeo-&gt;tmInf.mtW[</span><span
+lang=EN-US style='color:red'>2</span><span lang=EN-US>][</span><span
+lang=EN-US style='color:red'>0</span><span lang=EN-US>]&nbsp; = x;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pGeo-&gt;tmInf.mtW[</span><span
+lang=EN-US style='color:red'>2</span><span lang=EN-US>][</span><span
+lang=EN-US style='color:red'>1</span><span lang=EN-US>]&nbsp; = z;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pGeo-&gt;tmInf.mtW[</span><span
+lang=EN-US style='color:red'>2</span><span lang=EN-US>][</span><span
+lang=EN-US style='color:red'>2</span><span lang=EN-US>]&nbsp; = y;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pGeo-&gt;tmInf.mtW[</span><span
+lang=EN-US style='color:red'>2</span><span lang=EN-US>][</span><span
+lang=EN-US style='color:red'>3</span><span lang=EN-US>]&nbsp; = w;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>…</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>if</span><span lang=EN-US>(</span><span
+lang=EN-US style='color:#880000'>CompareAseKey</span><span lang=EN-US>(sLine,
+Keywords[</span><span lang=EN-US style='color:#A000A0'>TM_ROW2</span><span
+lang=EN-US>]) )</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>…</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pGeo-&gt;tmInf.mtW[</span><span
+lang=EN-US style='color:red'>1</span><span lang=EN-US>][</span><span
+lang=EN-US style='color:red'>0</span><span lang=EN-US>]&nbsp; = x;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pGeo-&gt;tmInf.mtW[</span><span
+lang=EN-US style='color:red'>1</span><span lang=EN-US>][</span><span
+lang=EN-US style='color:red'>1</span><span lang=EN-US>]&nbsp; = z;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pGeo-&gt;tmInf.mtW[</span><span
+lang=EN-US style='color:red'>1</span><span lang=EN-US>][</span><span
+lang=EN-US style='color:red'>2</span><span lang=EN-US>]&nbsp; = y;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pGeo-&gt;tmInf.mtW[</span><span
+lang=EN-US style='color:red'>1</span><span lang=EN-US>][</span><span
+lang=EN-US style='color:red'>3</span><span lang=EN-US>]&nbsp; = w;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US><a
+href="https://github.com/3dapi/bs27_ani/raw/master/asa21_tm.zip">asa21_tm.zip</a></span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal>앞서 이야기 했듯이 이 행렬은 지오메트리<span lang=EN-US>(</span>노드<span
+lang=EN-US>)</span>의 월드행렬입니다<span lang=EN-US>. </span>따라서 이를 지역행렬로 바꾸어야 하는데 이 행렬은
+익스포터가 다음과 같은 수식으로 만들고 출력한 행렬 값입니다<span lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal>지오메트리 행렬<span lang=EN-US>(</span>자신의 월드행렬<span lang=EN-US>)
+= (</span>자신의 지역행렬<span lang=EN-US>) * (</span>부모의 월드행렬<span lang=EN-US>)</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal>따라서 자신의 지역행렬은 앞의 수식의 양변에 부모 행렬의 역행렬을 곱하면 지오메트리 자신의 지역행렬을 구할 수
+있습니다<span lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal>자신의 지역행렬<span lang=EN-US> = (</span>자신의 월드행렬<span
+lang=EN-US>) * (</span>부모 월드행렬의 역행렬<span lang=EN-US>)</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>≡
+<span lang=EN-US>Local = World * (Parent World)<sup>-1</sup></span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal>이것을 프로그램으로 구현하면 다음과 같습니다<span lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:blue'>D3DXMATRIX</span><span lang=EN-US> mtPrn =
+pGeoPrn-&gt;TmInf.mtW; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:green'>// </span><span style='color:green'>부모의 월드행렬</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:blue'>D3DXMATRIX</span><span lang=EN-US> mtPrnI;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:green'>// </span><span style='color:green'>부모 월드행렬의 역행렬</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:blue'>D3DXMATRIX</span><span lang=EN-US> mtL;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:green'>// </span><span style='color:green'>자신의 지역행렬</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:#880000'>D3DXMatrixInverse</span><span lang=EN-US>(&amp;mtPrnI, </span><span
+lang=EN-US style='color:#A000A0'>NULL</span><span lang=EN-US>, &amp;mtPrn); &nbsp;&nbsp; </span><span
+lang=EN-US style='color:green'>// </span><span style='color:green'>부모 월드행렬의 역행렬</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:green'>// </span><span style='color:green'>자신의 지역행렬<span
+lang=EN-US> = (</span>자신의 월드행렬<span lang=EN-US>) * (</span>부모 월드행렬의 역행렬<span
+lang=EN-US>)</span></span></p>
+
+<p class=MsoNormal><span lang=EN-US>pGeo-&gt;TmInf.mtL = pGeo-&gt;TmInf.mtW *
+mtPrnI;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>ASE </span>파일의 지오메트리는 자료구조의 숲<span
+lang=EN-US>(Forest) </span>구조로 구성되어 있고<span lang=EN-US> ASE </span>익스포터는 각각의 지오메트리를
+깊이 우선 순회로 접근해서 데이터를 출력한다고 했습니다<span lang=EN-US>. </span>따라서 파일에서 순차적으로 읽은 지오메트리의
+순서는 곧 숲을 구성하는 나무<span lang=EN-US>(Tree) </span>자료구조와 일치하므로<span lang=EN-US> for
+</span>루프를 통해서 순서대로 지역행렬을 만들면 됩니다<span lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal>루트와 같이 만약 부모가 없다면 부모의 월드행렬의 역행렬은 항등행렬로 설정해서 지역행렬을 구하면 됩니다<span
+lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US style='color:blue'>void</span><span
+lang=EN-US> </span><span lang=EN-US style='color:blue'>CLcAse</span><span
+lang=EN-US>::</span><span lang=EN-US style='color:#880000'>ParseReBuild</span><span
+lang=EN-US>()</span></p>
+
+<p class=MsoNormal><span lang=EN-US>…</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:green'>// TmLocal = TmWorld * TmWorld(parent)^-1</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:blue'>for</span><span lang=EN-US>(i=</span><span lang=EN-US
+style='color:red'>0</span><span lang=EN-US>; i&lt;m_nGeo; ++i)</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>{</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>AseGeo</span><span lang=EN-US>* pGeoCur =
+&amp;m_pGeo[i];</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>AseGeo</span><span lang=EN-US>* pGeoPrn = </span><span
+lang=EN-US style='color:#A000A0'>NULL</span><span lang=EN-US>;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:green'>// </span><span style='color:green'>부모 지오메트리 찾기</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>for</span><span lang=EN-US>(j=</span><span
+lang=EN-US style='color:red'>0</span><span lang=EN-US>; j&lt;m_nGeo; ++j)</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>AseGeo</span><span lang=EN-US>* pGeoT =
+&amp;m_pGeo[j];</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>if</span><span lang=EN-US>(</span><span
+lang=EN-US style='color:red'>0</span><span lang=EN-US>==</span><span
+lang=EN-US style='color:#880000'>_stricmp</span><span lang=EN-US>(pGeoCur-&gt;sNodePrn,
+pGeoT-&gt;sNodeCur))</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pGeoPrn&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; =
+pGeoT;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pGeoCur-&gt;pGeoPrn=
+pGeoT;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>break</span><span lang=EN-US>;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>…</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:green'>// </span><span style='color:green'>부모 지오메트리 발견</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>if</span><span lang=EN-US>(pGeoPrn)</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>D3DXMATRIX</span><span lang=EN-US> mtPrn =
+pGeoPrn-&gt;TmInf.mtW;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>D3DXMATRIX</span><span lang=EN-US> mtPrnI;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>D3DXMATRIX</span><span lang=EN-US> mtL;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:#880000'>D3DXMatrixInverse</span><span lang=EN-US>(&amp;mtPrnI,
+</span><span lang=EN-US style='color:#A000A0'>NULL</span><span lang=EN-US>,
+&amp;mtPrn);</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pGeoCur-&gt;TmInf.mtL
+= pGeoCur-&gt;TmInf.mtW * mtPrnI;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:green'>// </span><span style='color:green'>부모 노드가 없는 루트의
+경우 자신의 월드를 지역 행렬로 설정</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>else</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pGeoCur-&gt;TmInf.mtL
+= pGeoCur-&gt;TmInf.mtW;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>…</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal>마지막으로 지오메트리의 정점 위치는 전체 장면의 월드 좌표계에서 바라본 위치 입니다<span
+lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>(</span>지오메트리 정점 위치<span lang=EN-US>) = (</span>지역
+좌표계 위치<span lang=EN-US>) * (</span>월드 행렬<span lang=EN-US>)</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal>따라서 이들은 지역 좌표계 위치로 바꾸어 합니다<span lang=EN-US>. </span>간단히 지오메트리
+정점의 위치에 월드 행렬의<span lang=EN-US>&nbsp; </span>역행렬로 변환 하면 됩니다<span lang=EN-US>.( </span>앞에서
+언급 했듯이 월드 행렬은<span lang=EN-US> ASE</span>의<span lang=EN-US>
+&quot;*NODE_TM&quot;</span>에 저장된 값입니다<span lang=EN-US>.)</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>(</span>지역 좌표계 위치<span lang=EN-US>) = (</span>지오메트리
+정점 위치<span lang=EN-US>) * (</span>월드 행렬의 역행렬<span lang=EN-US>)</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:green'>// </span><span style='color:green'>지역 좌표계로 위치 변환</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:green'>// v(local position) = v(Geometry world position)*TmWorld^-1</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:blue'>for</span><span lang=EN-US>(</span><span lang=EN-US
+style='color:#010001'>i</span><span lang=EN-US>=</span><span lang=EN-US
+style='color:red'>0</span><span lang=EN-US>; </span><span lang=EN-US
+style='color:#010001'>i</span><span lang=EN-US>&lt;</span><span lang=EN-US
+style='color:#010001'>m_nGeo</span><span lang=EN-US>; ++</span><span
+lang=EN-US style='color:#010001'>i</span><span lang=EN-US>)</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>{</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>AseGeo</span><span lang=EN-US>* </span><span
+lang=EN-US style='color:#010001'>pGeoCur</span><span lang=EN-US> = &amp;</span><span
+lang=EN-US style='color:#010001'>m_pGeo</span><span lang=EN-US>[</span><span
+lang=EN-US style='color:#010001'>i</span><span lang=EN-US>];</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:green'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // </span><span
+style='color:green'>월드 행렬의 역행렬을 구함</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>D3DXMATRIX</span><span lang=EN-US> </span><span
+lang=EN-US style='color:#010001'>mtWI</span><span lang=EN-US>;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:#880000'>D3DXMatrixInverse</span><span lang=EN-US>(&amp;</span><span
+lang=EN-US style='color:#010001'>mtWI</span><span lang=EN-US>, </span><span
+lang=EN-US style='color:#010001'>NULL</span><span lang=EN-US>, &amp;</span><span
+lang=EN-US style='color:#010001'>pGeoCur</span><span lang=EN-US>-&gt;</span><span
+lang=EN-US style='color:#010001'>TmInf</span><span lang=EN-US>.</span><span
+lang=EN-US style='color:#010001'>mtW</span><span lang=EN-US>);</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:green'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // </span><span
+style='color:green'>정점 위치를 지역 좌표계 위치로 변경</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>for</span><span lang=EN-US>(</span><span
+lang=EN-US style='color:#010001'>j</span><span lang=EN-US>=</span><span
+lang=EN-US style='color:red'>0</span><span lang=EN-US>; </span><span
+lang=EN-US style='color:#010001'>j</span><span lang=EN-US>&lt;</span><span
+lang=EN-US style='color:#010001'> pGeoCur</span><span lang=EN-US>-&gt;</span><span
+lang=EN-US style='color:#010001'>iNumVtx</span><span lang=EN-US>; ++</span><span
+lang=EN-US style='color:#010001'>j</span><span lang=EN-US>)</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>D3DXVECTOR3</span><span lang=EN-US> </span><span
+lang=EN-US style='color:#010001'>vcI</span><span lang=EN-US> = *((</span><span
+lang=EN-US style='color:blue'>D3DXVECTOR3</span><span lang=EN-US>*)&amp;(</span><span
+lang=EN-US style='color:#010001'>pGeoCur</span><span lang=EN-US>-&gt;</span><span
+lang=EN-US style='color:#010001'>pLstVtx</span><span lang=EN-US>[</span><span
+lang=EN-US style='color:#010001'>j</span><span lang=EN-US>]));</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>D3DXVECTOR3</span><span lang=EN-US> </span><span
+lang=EN-US style='color:#010001'>vcO</span><span lang=EN-US>;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:green'>// </span><span style='color:green'>정점 위치를 지역 좌표계
+위치로 변경</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:#880000'>D3DXVec3TransformCoord</span><span lang=EN-US>(&amp;</span><span
+lang=EN-US style='color:#010001'>vcO</span><span lang=EN-US>, &amp;</span><span
+lang=EN-US style='color:#010001'>vcI</span><span lang=EN-US>, &amp;</span><span
+lang=EN-US style='color:#010001'>mtWI</span><span lang=EN-US>);</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:green'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //
+</span><span style='color:green'>저장</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *((</span><span
+lang=EN-US style='color:blue'>D3DXVECTOR3</span><span lang=EN-US>*)&amp;(</span><span
+lang=EN-US style='color:#010001'>pGeoCur</span><span lang=EN-US>-&gt;</span><span
+lang=EN-US style='color:#010001'>pLstVtx</span><span lang=EN-US>[</span><span
+lang=EN-US style='color:#010001'>j</span><span lang=EN-US>])) = </span><span
+lang=EN-US style='color:#010001'>vcO</span><span lang=EN-US>;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>…</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US><a
+href="https://github.com/3dapi/bs27_ani/raw/master/asa22_tm_local.zip">asa22_tm_local.zip</a></span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US style='font-size:14.0pt'>2.2 SCENE </span><span
+style='font-size:14.0pt'>해석</span></p>
+
+<p class=MsoNormal>지역행렬을 구했다면 애니메이션을 할 수 있습니다<span lang=EN-US>. </span>애니메이션 스피드<span
+lang=EN-US>, </span>전체 애니메이션 수 등은 <span lang=EN-US>&nbsp;ASE</span>의 <span
+lang=EN-US>&quot;SCENE&quot; </span>부분에 있습니다<span lang=EN-US>. ASE</span>의<span
+lang=EN-US> SCENE</span>은 간단하므로 쉽게 해석할 수 있습니다<span lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US style='color:green'>// ASE SCENE</span><span
+style='color:green'>를 저장하기 위한 구조체</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:blue'>struct</span><span lang=EN-US> </span><span lang=EN-US
+style='color:blue'>AseScene</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>{</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>INT</span><span lang=EN-US> nFrameFirst; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:green'>// </span><span style='color:green'>시작 프레임 인덱스</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>INT</span><span lang=EN-US> nFrameLast; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:green'>// </span><span style='color:green'>마지막 프레임 인덱스</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>INT</span><span lang=EN-US> nFrameSpeed; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:green'>// </span><span style='color:green'>프레임 스피드</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>INT</span><span lang=EN-US> nFrameTick; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:green'>// </span><span style='color:green'>프레임당 시간 간격</span></p>
+
+<p class=MsoNormal><span lang=EN-US>};</span></p>
+
+<p class=MsoNormal><span lang=EN-US>…</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:blue'>INT</span><span lang=EN-US> </span><span lang=EN-US
+style='color:blue'>CLcAse</span><span lang=EN-US>::</span><span lang=EN-US
+style='color:#880000'>ParseScene</span><span lang=EN-US>(</span><span
+lang=EN-US style='color:blue'>FILE</span><span lang=EN-US>* fp)</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>…</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>if</span><span lang=EN-US>(</span><span
+lang=EN-US style='color:#880000'>CompareAseKey</span><span lang=EN-US>(sLine,
+Keywords[</span><span lang=EN-US style='color:#A000A0'>FRAME_FIRST</span><span
+lang=EN-US>]) )</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:#880000'>sscanf</span><span lang=EN-US>(sLine, </span><span
+lang=EN-US style='color:#A000A0'>&quot;%*s %d&quot;</span><span lang=EN-US>,
+&amp;m_AseScene.nFrameFirst);</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>if</span><span lang=EN-US>(</span><span
+lang=EN-US style='color:#880000'>CompareAseKey</span><span lang=EN-US>(sLine,
+Keywords[</span><span lang=EN-US style='color:#A000A0'>FRAME_LAST</span><span
+lang=EN-US>]) )</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:#880000'>sscanf</span><span lang=EN-US>(sLine, </span><span
+lang=EN-US style='color:#A000A0'>&quot;%*s %d&quot;</span><span lang=EN-US>,
+&amp;m_AseScene.nFrameLast);</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>if</span><span lang=EN-US>(</span><span
+lang=EN-US style='color:#880000'>CompareAseKey</span><span lang=EN-US>(sLine,
+Keywords[</span><span lang=EN-US style='color:#A000A0'>FRAME_SPEED</span><span
+lang=EN-US>]) )</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:#880000'>sscanf</span><span lang=EN-US>(sLine, </span><span
+lang=EN-US style='color:#A000A0'>&quot;%*s %d&quot;</span><span lang=EN-US>,
+&amp;m_AseScene.nFrameSpeed);</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>if</span><span lang=EN-US>(</span><span
+lang=EN-US style='color:#880000'>CompareAseKey</span><span lang=EN-US>(sLine,
+Keywords[</span><span lang=EN-US style='color:#A000A0'>FRAME_TICK</span><span
+lang=EN-US>]) )</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:#880000'>sscanf</span><span lang=EN-US>(sLine, </span><span
+lang=EN-US style='color:#A000A0'>&quot;%*s %d&quot;</span><span lang=EN-US>,
+&amp;m_AseScene.nFrameTick);</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US><a
+href="https://github.com/3dapi/bs27_ani/raw/master/asa23_scene.zip">asa23_scene.zip</a></span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US style='font-size:14.0pt'>2.3 Animation
+Track</span></p>
+
+<p class=MsoNormal>오브젝트가 <span lang=EN-US>Biped</span>애니메이션이 있을 경우<span
+lang=EN-US>, </span>익스포트 할 때<span lang=EN-US> Transform Animation Key</span>를 선택하면<span
+lang=EN-US> ASE</span>는 지오메트리의 <span lang=EN-US>&quot;*CONTROL_POS_TRACK&quot;,
+&quot;*CONTROL_ROT_TRACK&quot;, &quot;*CONTROL_SCALE_TRACK&quot; </span>키워드 안에 애니메이션
+데이터를 저장합니다<span lang=EN-US>.</span></p>
+
+<p class=MsoNormal>애니메이션 데이터는 이동과 크기 변환에 대해서<span lang=EN-US> {</span>키워드<span
+lang=EN-US>, </span>시간<span lang=EN-US>, x, y, z} </span>형식으로 저장합니다<span
+lang=EN-US>. </span>회전은<span lang=EN-US> {</span>키워드<span lang=EN-US>, </span>시간<span
+lang=EN-US>, x, y, z, w} </span>형식으로 저장하며 이 값은 사원수로 변경해서 사용합니다<span lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal>주의 해야 할 것은<span lang=EN-US> ASE </span>파일에 저장된 맥스의 시간은 <span
+lang=EN-US>Tick</span>을 사용하고 이것은 우리가 사용하는<span lang=EN-US> 1/1000</span>초가 아닙니다<span
+lang=EN-US>. </span>시간을 게임 시간으로 변경해야 하는데 애니메이션 시간을 <span lang=EN-US>SCENE </span>안에
+<span lang=EN-US>SCENE_TICKSPERFRAME </span>저장된 값으로 나누면 해당 프레임을 얻고 이 프레임에 다시<span
+lang=EN-US> SCENE</span>의 <span lang=EN-US>SCENE_FRAMESPEED </span>을 곱하면 절대 시간을
+얻게 됩니다<span lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal>좀 더 구체적인 방법은 이후 시간에 대한 애니메이션에서 더 논의 하고 여기서는 데이터 해석에 집중하겠습니다<span
+lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal>먼저 위치<span lang=EN-US>, </span>회전<span lang=EN-US>, </span>크기
+변환을 저장하기 위한 구조체를 구성합니다<span lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:blue'>struct</span><span lang=EN-US> </span><span lang=EN-US
+style='color:blue'>AseTrack</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>{</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>FLOAT</span><span lang=EN-US>&nbsp;&nbsp; x, y,
+z, w; &nbsp;&nbsp; </span><span lang=EN-US style='color:green'>// Animation </span><span
+style='color:green'>정보 저장</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>INT</span><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp; nF;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:green'>// Frame Index</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>};</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal>구조체에서<span lang=EN-US> x, y, z, w </span>를<span lang=EN-US>
+Frame Index</span>보다 앞에 순서대로 놓으면 이 값을 저장한 변수의 주소를 위치 또는 사원수로<span lang=EN-US>
+static casting</span>이 가능하므로 불필요한 변수의 복사가 줄어듭니다<span lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal>앞에서 지오메트리 숫자는 기록이 없어서 키워드를 가지고 숫자를 세었습니다<span lang=EN-US>. </span>이
+방법은 그리 훌륭한 방법이 못 되는데 그것은<span lang=EN-US> STL</span>이라는 좋은 자료구조가<span
+lang=EN-US> C++</span>에서 제공하기 때문입니다<span lang=EN-US>. </span>애니메이션 트랙 데이터는<span
+lang=EN-US> STL</span>의<span lang=EN-US> vector </span>컨테이너를 사용해서 저장해 봅시다<span
+lang=EN-US>. </span>애니메이션 데이터를 저장할 수 있는 구조체를 선언합니다<span lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US style='color:blue'>&nbsp;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:blue'>struct</span><span lang=EN-US> </span><span lang=EN-US
+style='color:blue'>AseTrackAni</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>{</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>char</span><span lang=EN-US>&nbsp;&nbsp;&nbsp; sNodeCur[</span><span
+lang=EN-US style='color:red'>64</span><span lang=EN-US>];&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:green'>// Current Node Name</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>std</span><span lang=EN-US>::</span><span
+lang=EN-US style='color:blue'>vector</span><span lang=EN-US>&lt;</span><span
+lang=EN-US style='color:blue'>AseTrack</span><span lang=EN-US> &gt; vRot;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:green'>// Rotation</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>std</span><span lang=EN-US>::</span><span
+lang=EN-US style='color:blue'>vector</span><span lang=EN-US>&lt;</span><span
+lang=EN-US style='color:blue'>AseTrack</span><span lang=EN-US> &gt; vTrs;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:green'>// Translation</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>std</span><span lang=EN-US>::</span><span
+lang=EN-US style='color:blue'>vector</span><span lang=EN-US>&lt;</span><span
+lang=EN-US style='color:blue'>AseTrack</span><span lang=EN-US> &gt; vScl;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:green'>// Scaling</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>};</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal>위치에 대한 애니메이션 저장은 프레임 인덱스를 구하고 앞에서 선언한 구조체의 인스턴스를 만들어 애니메이션 컨테이너에
+저장합니다<span lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:blue'>if</span><span lang=EN-US>(</span><span lang=EN-US
+style='color:#880000'>CompareAseKey</span><span lang=EN-US>(sLine, Keywords[</span><span
+lang=EN-US style='color:#A000A0'>POS_SAMPLE</span><span lang=EN-US>]) )</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>…</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:#880000'>sscanf</span><span lang=EN-US>(sLine, </span><span
+lang=EN-US style='color:#A000A0'>&quot;%*s %d %f %f %f&quot;</span><span
+lang=EN-US>, &amp;nFrm, &amp;x, &amp;y, &amp;z);</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:green'>// </span><span style='color:green'>프레인 인덱스<span
+lang=EN-US> = sample tick/(SCENE Tick)</span></span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; nFrm
+/= m_AseScene.nFrameTick;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:green'>// </span><span style='color:green'>애니메이션 벡터 컨테이너에
+저장</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>AseTrack</span><span lang=EN-US> trck(nFrm, x, y,
+z, </span><span lang=EN-US style='color:red'>0</span><span lang=EN-US>);</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pTrckAni-&gt;vTrs.</span><span
+lang=EN-US style='color:#880000'>push_back</span><span lang=EN-US>(trck);</span></p>
+
+<p class=MsoNormal><span lang=EN-US>…</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'>크기 변환 애니메이션도 위치 변환과 유사하게 처리합니다<span
+lang=EN-US>.</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:green'>&nbsp;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:blue'>if</span><span lang=EN-US>(</span><span lang=EN-US
+style='color:#880000'>CompareAseKey</span><span lang=EN-US>(sLine,
+Keywords[SCALE_TRACK]) )</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>…</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:#880000'>sscanf</span><span lang=EN-US>(sLine, </span><span
+lang=EN-US style='color:#A000A0'>&quot;%*s %d %f %f %f&quot;</span><span
+lang=EN-US>, &amp;nFrm, &amp;x, &amp;y, &amp;z);</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; nFrm
+/= m_AseScene.nFrameTick;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; AseTrack
+trck(nFrm, x, y, z, </span><span lang=EN-US style='color:red'>0</span><span
+lang=EN-US>);</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pTrckAni-&gt;vScl.</span><span
+lang=EN-US style='color:#880000'>push_back</span><span lang=EN-US>(trck);</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal>회전 변환에 대한 애니메이션 해석은 파일에서 읽어온<span lang=EN-US> x, y, z, w </span>값에서
+사원수를 생성하고 저장합니다<span lang=EN-US>. ASE</span>에 저장된 회전은 이전 프레임과의 차이만 저장합니다<span
+lang=EN-US>. </span>따라서 이것을 절대적인 행렬 값으로 바꾸어야 하고 계속 누적을 해야 하는데 사원수를 사용하면 단순한 곱셈 만으로
+누적을 편리하게 구현할 수 있기 때문입니다<span lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:blue'>if</span><span lang=EN-US>(</span><span lang=EN-US
+style='color:#880000'>CompareAseKey</span><span lang=EN-US>(sLine,
+Keywords[ROT_SAMPLE]) )</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>…</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:#880000'>sscanf</span><span lang=EN-US>(sLine, </span><span
+lang=EN-US style='color:#A000A0'>&quot;%*s %d %f %f %f %f&quot;</span><span
+lang=EN-US>, &amp;nFrm, &amp;x, &amp;y, &amp;z, &amp;w);</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; nFrm
+/= m_AseScene.nFrameTick;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:green'>// x, y, z, w </span><span style='color:green'>에서
+사원수를 구한다</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; x
+= </span><span lang=EN-US style='color:#880000'>sinf</span><span lang=EN-US>(w/</span><span
+lang=EN-US style='color:red'>2.0f</span><span lang=EN-US>) * x;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; y
+= </span><span lang=EN-US style='color:#880000'>sinf</span><span lang=EN-US>(w/</span><span
+lang=EN-US style='color:red'>2.0f</span><span lang=EN-US>) * y;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; z
+= </span><span lang=EN-US style='color:#880000'>sinf</span><span lang=EN-US>(w/</span><span
+lang=EN-US style='color:red'>2.0f</span><span lang=EN-US>) * z;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; w
+= </span><span lang=EN-US style='color:#880000'>cosf</span><span lang=EN-US>(w/</span><span
+lang=EN-US style='color:red'>2.0f</span><span lang=EN-US>);</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>INT</span><span lang=EN-US> iSize =
+pTrckAni-&gt;vRot.</span><span lang=EN-US style='color:#880000'>size</span><span
+lang=EN-US>();</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:green'>// </span><span style='color:green'>사원수를 처음하는 경우</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>if</span><span lang=EN-US>(</span><span
+lang=EN-US style='color:red'>0</span><span lang=EN-US>==iSize)</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>AseTrack</span><span lang=EN-US> trck(nFrm, x, y,
+z, w);</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pTrckAni-&gt;vRot.</span><span
+lang=EN-US style='color:#880000'>push_back</span><span lang=EN-US>(trck);</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:green'>// </span><span style='color:green'>앞의 사원수를 얻고 누적을
+위해서 곱셈한 후<span lang=EN-US>, </span>이 사원수 값을 저장</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>else</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>D3DXQUATERNION</span><span lang=EN-US> q1(x,y,z,w);</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>D3DXQUATERNION</span><span lang=EN-US>*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; q2;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>D3DXQUATERNION</span><span lang=EN-US> q3;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:green'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //
+</span><span style='color:green'>이전 프레임의 사원수 값</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; q2
+= (</span><span lang=EN-US style='color:blue'>D3DXQUATERNION</span><span
+lang=EN-US>*)&amp;pTrckAni-&gt;vRot[iSize-</span><span lang=EN-US
+style='color:red'>1</span><span lang=EN-US>];</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:green'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //
+</span><span style='color:green'>사원수 누적<span lang=EN-US>(</span>곱셈<span
+lang=EN-US>)</span></span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:#880000'>D3DXQuaternionMultiply</span><span lang=EN-US>(&amp;q3,
+q2, &amp;q1);</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:green'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //
+</span><span style='color:green'>사원수 저장</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>AseTrack</span><span lang=EN-US> trck(nFrm, q3.x,
+q3.y, q3.z, q3.w);</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pTrckAni-&gt;vRot.</span><span
+lang=EN-US style='color:#880000'>push_back</span><span lang=EN-US>( trck );</span></p>
+
+<p class=MsoNormal><span lang=EN-US>…</span></p>
+
+<p class=MsoNormal><span lang=EN-US><img border=0 width=320 height=227
+src="bs27_ani.files/image015.jpg"></span></p>
+
+<p class=MsoNormal><span lang=EN-US>&lt;ASE Track: <a
+href="https://github.com/3dapi/bs27_ani/raw/master/asa24_track.zip">asa24_track.zip</a>&gt;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US style='font-size:14.0pt'>2.4 Hierarchic Animation</span></p>
+
+<p class=MsoNormal>애니메이션 해석을 마지막으로<span lang=EN-US> ASE </span>해석은 끝났습니다<span
+lang=EN-US>. </span>남은 것은 기술적인 것으로 계층 애니메이션<span lang=EN-US>, </span>애니메이션 보간<span
+lang=EN-US>, </span>텍스트 대신 이진 파일 사용<span lang=EN-US>, </span>객체들의 인스턴스 관리<span
+lang=EN-US>, ASE </span>익스포터 수정 등이 남아 있습니다<span lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal>계층 애니메이션은 다음 그림과 같이 시간에 따라 루트부터 <span lang=EN-US>DFS(Depth
+First Search: </span>깊이 우선 순회<span lang=EN-US>) </span>방법으로 하위 노드들을 접근하면서 지역 행렬을
+갱신하고<span lang=EN-US>, </span>지역행렬에서 월드 행렬을 갱신하는 애니메이션입니다<span lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US><img border=0 width=361 height=324
+src="bs27_ani.files/image016.png"></span></p>
+
+<p class=MsoNormal><span lang=EN-US>&lt; DFS </span>방식의 노드 순회와 행렬 연산 순서<span
+lang=EN-US>&gt;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal>지역 행렬을 구성하기 위해서 지오메트리 인덱스<span lang=EN-US>, </span>프레임 인덱스를 인수로
+받고 행렬을 반환하는 멤버 함수를 추가합니다<span lang=EN-US>. </span>이 멤버 함수는 크기 변환<span
+lang=EN-US>, </span>회전 변환<span lang=EN-US>, </span>이동 변환 순서대로 지역행렬을 계산 합니다<span
+lang=EN-US>. </span>만약 애니메이션이 없으면 지역 행렬 값을 사용합니다<span lang=EN-US>.</span></p>
+
+<p class=MsoNormal>애니메이션이 있으면 해당 프레임의 인덱스로 애니메이션 트랙의 인덱스를 찾아서 행렬을 만드는데 회전을 저장하고
+있는 트랙은 사원수를 사용하므로 <span lang=EN-US style='color:#010001'>D3DXMatrixRotationQuaternion()
+</span><span style='color:#010001'>함수 등을 사용해서 사원수에서 행렬을 얻습니다<span lang=EN-US>.</span></span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:blue'>INT</span><span lang=EN-US> </span><span lang=EN-US
+style='color:blue'>CLcAse</span><span lang=EN-US>::</span><span lang=EN-US
+style='color:#880000'>GetAniTrack</span><span lang=EN-US>(</span><span
+lang=EN-US style='color:blue'>void</span><span lang=EN-US>* </span><span
+lang=EN-US style='color:#010001'>mtOut</span><span lang=EN-US>, </span><span
+lang=EN-US style='color:blue'>INT</span><span lang=EN-US> </span><span
+lang=EN-US style='color:#010001'>nGeo</span><span lang=EN-US>, </span><span
+lang=EN-US style='color:blue'>INT</span><span lang=EN-US> </span><span
+lang=EN-US style='color:#010001'>nFrame</span><span lang=EN-US>)</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>…</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:blue'>D3DXMATRIX</span><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:#010001'>mtA</span><span lang=EN-US>(</span><span
+lang=EN-US style='color:red'>1</span><span lang=EN-US>,</span><span lang=EN-US
+style='color:red'>0</span><span lang=EN-US>,</span><span lang=EN-US
+style='color:red'>0</span><span lang=EN-US>,</span><span lang=EN-US
+style='color:red'>0</span><span lang=EN-US>,&nbsp;&nbsp; </span><span
+lang=EN-US style='color:red'>0</span><span lang=EN-US>,</span><span lang=EN-US
+style='color:red'>1</span><span lang=EN-US>,</span><span lang=EN-US
+style='color:red'>0</span><span lang=EN-US>,</span><span lang=EN-US
+style='color:red'>0</span><span lang=EN-US>,&nbsp;&nbsp; </span><span
+lang=EN-US style='color:red'>0</span><span lang=EN-US>,</span><span lang=EN-US
+style='color:red'>0</span><span lang=EN-US>,</span><span lang=EN-US
+style='color:red'>1</span><span lang=EN-US>,</span><span lang=EN-US
+style='color:red'>0</span><span lang=EN-US>,&nbsp;&nbsp; </span><span
+lang=EN-US style='color:red'>0</span><span lang=EN-US>,</span><span lang=EN-US
+style='color:red'>0</span><span lang=EN-US>,</span><span lang=EN-US
+style='color:red'>0</span><span lang=EN-US>,</span><span lang=EN-US
+style='color:red'>1</span><span lang=EN-US>);</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:blue'>AseGeo</span><span lang=EN-US>*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:#010001'>pGeo</span><span lang=EN-US>&nbsp;&nbsp;&nbsp; =
+&amp;</span><span lang=EN-US style='color:#010001'>m_pGeo</span><span
+lang=EN-US>[</span><span lang=EN-US style='color:#010001'>nGeo</span><span
+lang=EN-US>];</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:blue'>INT</span><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:#010001'>iSizeR</span><span lang=EN-US> = </span><span
+lang=EN-US style='color:#010001'>pGeo</span><span lang=EN-US>-&gt;</span><span
+lang=EN-US style='color:#010001'>vRot</span><span lang=EN-US>.</span><span
+lang=EN-US style='color:#010001'>size</span><span lang=EN-US>();</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:blue'>INT</span><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:#010001'>iSizeP</span><span lang=EN-US> = </span><span
+lang=EN-US style='color:#010001'>pGeo</span><span lang=EN-US>-&gt;</span><span
+lang=EN-US style='color:#010001'>vTrs</span><span lang=EN-US>.</span><span
+lang=EN-US style='color:#010001'>size</span><span lang=EN-US>();</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:blue'>D3DXQUATERNION*</span><span lang=EN-US> </span><span
+lang=EN-US style='color:#010001'>q</span><span lang=EN-US>= </span><span
+lang=EN-US style='color:#A000A0'>NULL</span><span lang=EN-US>;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:blue'>D3DXVECTOR3*</span><span lang=EN-US> </span><span
+lang=EN-US style='color:#010001'>p</span><span lang=EN-US>= </span><span
+lang=EN-US style='color:#A000A0'>NULL</span><span lang=EN-US>;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:blue'>&nbsp;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:green'>// </span><span style='color:green'>회전</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:blue'>…</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:blue'>for</span><span lang=EN-US>(</span><span lang=EN-US
+style='color:#010001'>i</span><span lang=EN-US>=</span><span lang=EN-US
+style='color:red'>0</span><span lang=EN-US>; </span><span lang=EN-US
+style='color:#010001'>i</span><span lang=EN-US>&lt;</span><span lang=EN-US
+style='color:#010001'>iSizeR</span><span lang=EN-US>-</span><span lang=EN-US
+style='color:red'>1</span><span lang=EN-US>; ++</span><span lang=EN-US
+style='color:#010001'>i</span><span lang=EN-US>)</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>{</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>if</span><span lang=EN-US>(</span><span
+lang=EN-US style='color:#010001'>pGeo</span><span lang=EN-US>-&gt;</span><span
+lang=EN-US style='color:#010001'>vRot</span><span lang=EN-US>[</span><span
+lang=EN-US style='color:#010001'>i</span><span lang=EN-US>].</span><span
+lang=EN-US style='color:#010001'>nF</span><span lang=EN-US> &lt;=</span><span
+lang=EN-US style='color:#010001'>nFrame</span><span lang=EN-US> &amp;&amp; </span><span
+lang=EN-US style='color:#010001'>nFrame</span><span lang=EN-US> &lt;</span><span
+lang=EN-US style='color:#010001'>pGeo</span><span lang=EN-US>-&gt;</span><span
+lang=EN-US style='color:#010001'>vRot</span><span lang=EN-US>[</span><span
+lang=EN-US style='color:#010001'>i</span><span lang=EN-US>+</span><span
+lang=EN-US style='color:red'>1</span><span lang=EN-US>].</span><span
+lang=EN-US style='color:#010001'>nF</span><span lang=EN-US>)</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:#010001'>q</span><span lang=EN-US> = (</span><span
+lang=EN-US style='color:blue'>D3DXQUATERNION</span><span lang=EN-US>*)&amp;</span><span
+lang=EN-US style='color:#010001'>pGeo</span><span lang=EN-US>-&gt;</span><span
+lang=EN-US style='color:#010001'>vRot</span><span lang=EN-US>[</span><span
+lang=EN-US style='color:#010001'>i</span><span lang=EN-US>];</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>break</span><span lang=EN-US>;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>…</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:blue'>if</span><span lang=EN-US>(</span><span lang=EN-US
+style='color:#010001'>q</span><span lang=EN-US>)</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:#880000'>D3DXMatrixRotationQuaternion</span><span
+lang=EN-US>(&amp;</span><span lang=EN-US style='color:#010001'>mtA</span><span
+lang=EN-US>, </span><span lang=EN-US style='color:#010001'>q</span><span
+lang=EN-US>);</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:blue'>…</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:green'>// </span><span style='color:green'>이동</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:blue'>for</span><span lang=EN-US>(</span><span lang=EN-US
+style='color:#010001'>i</span><span lang=EN-US>=</span><span lang=EN-US
+style='color:red'>0</span><span lang=EN-US>; </span><span lang=EN-US
+style='color:#010001'>i</span><span lang=EN-US>&lt;</span><span lang=EN-US
+style='color:#010001'>iSizeP</span><span lang=EN-US>-</span><span lang=EN-US
+style='color:red'>1</span><span lang=EN-US>; ++</span><span lang=EN-US
+style='color:#010001'>i</span><span lang=EN-US>)</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>{</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>if</span><span lang=EN-US>(</span><span
+lang=EN-US style='color:#010001'>pGeo</span><span lang=EN-US>-&gt;</span><span
+lang=EN-US style='color:#010001'>vTrs</span><span lang=EN-US>[</span><span
+lang=EN-US style='color:#010001'>i</span><span lang=EN-US>].</span><span
+lang=EN-US style='color:#010001'>nF</span><span lang=EN-US> &lt;=</span><span
+lang=EN-US style='color:#010001'>nFrame</span><span lang=EN-US> &amp;&amp; </span><span
+lang=EN-US style='color:#010001'>nFrame</span><span lang=EN-US> &lt;</span><span
+lang=EN-US style='color:#010001'>pGeo</span><span lang=EN-US>-&gt;</span><span
+lang=EN-US style='color:#010001'>vTrs</span><span lang=EN-US>[</span><span
+lang=EN-US style='color:#010001'>i</span><span lang=EN-US>+</span><span
+lang=EN-US style='color:red'>1</span><span lang=EN-US>].</span><span
+lang=EN-US style='color:#010001'>nF</span><span lang=EN-US>)</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:#010001'>p</span><span lang=EN-US> = (</span><span
+lang=EN-US style='color:blue'>D3DXVECTOR3</span><span lang=EN-US>*)&amp;</span><span
+lang=EN-US style='color:#010001'>pGeo</span><span lang=EN-US>-&gt;</span><span
+lang=EN-US style='color:#010001'>vTrs</span><span lang=EN-US>[</span><span
+lang=EN-US style='color:#010001'>i</span><span lang=EN-US>];</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>break</span><span lang=EN-US>;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>…</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:blue'>if</span><span lang=EN-US>(</span><span lang=EN-US
+style='color:#010001'>p</span><span lang=EN-US>)</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>{</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:#010001'>mtA</span><span lang=EN-US>.</span><span
+lang=EN-US style='color:#010001'>_41</span><span lang=EN-US> = </span><span
+lang=EN-US style='color:#010001'>p</span><span lang=EN-US>-&gt;</span><span
+lang=EN-US style='color:#010001'>x</span><span lang=EN-US>;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:#010001'>mtA</span><span lang=EN-US>.</span><span
+lang=EN-US style='color:#010001'>_42</span><span lang=EN-US> = </span><span
+lang=EN-US style='color:#010001'>p</span><span lang=EN-US>-&gt;</span><span
+lang=EN-US style='color:#010001'>y</span><span lang=EN-US>;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:#010001'>mtA</span><span lang=EN-US>.</span><span
+lang=EN-US style='color:#010001'>_43</span><span lang=EN-US> = </span><span
+lang=EN-US style='color:#010001'>p</span><span lang=EN-US>-&gt;</span><span
+lang=EN-US style='color:#010001'>z</span><span lang=EN-US>;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>}</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>…</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:green'>// </span><span style='color:green'>최종</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>*((</span><span
+lang=EN-US style='color:blue'>D3DXMATRIX</span><span lang=EN-US>*) </span><span
+lang=EN-US style='color:#010001'>mtOut</span><span lang=EN-US>) = </span><span
+lang=EN-US style='color:#010001'>mtA</span><span lang=EN-US>;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal>앞서 이야기 했듯이 <span lang=EN-US>ASE</span>의 파일 내용은<span
+lang=EN-US> DFS </span>방식을 따라 저장되어 있습니다<span lang=EN-US>. </span>따라서 우리는 간단히 순차적으로
+지역행렬<span lang=EN-US>, </span>월드행렬을 갱신하면 애니메이션에 대한 행렬 갱신은 마무리가 됩니다<span
+lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:blue'>INT</span><span lang=EN-US> </span><span lang=EN-US
+style='color:blue'>CLcAse</span><span lang=EN-US>::</span><span lang=EN-US
+style='color:#880000'>FrameMove</span><span lang=EN-US>()</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>…</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:blue'>INT</span><span lang=EN-US> </span><span lang=EN-US
+style='color:#010001'>i</span><span lang=EN-US>=</span><span lang=EN-US
+style='color:red'>0</span><span lang=EN-US>;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:green'>// </span><span style='color:green'>시간을 갱신하고 현재의 프레임 계산</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:#010001'>m_dCur</span><span lang=EN-US> = </span><span lang=EN-US
+style='color:#010001'>timeGetTime</span><span lang=EN-US>();</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:blue'>if</span><span lang=EN-US>(</span><span lang=EN-US
+style='color:#010001'>m_dCur</span><span lang=EN-US>&gt;</span><span
+lang=EN-US style='color:#010001'>m_dBgn</span><span lang=EN-US>+</span><span
+lang=EN-US style='color:#010001'>m_nFrmS</span><span lang=EN-US>)</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>{</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>…</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:#010001'>m_nFrmC</span><span lang=EN-US> =</span><span
+lang=EN-US style='color:#010001'>m_nFrmF</span><span lang=EN-US>;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>}</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:blue'>for</span><span lang=EN-US>(</span><span lang=EN-US
+style='color:#010001'>i</span><span lang=EN-US>=</span><span lang=EN-US
+style='color:red'>0</span><span lang=EN-US>; </span><span lang=EN-US
+style='color:#010001'>i</span><span lang=EN-US>&lt;</span><span lang=EN-US
+style='color:#010001'>m_nGeo</span><span lang=EN-US>; ++</span><span
+lang=EN-US style='color:#010001'>i</span><span lang=EN-US>)</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>{</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>AseGeo</span><span lang=EN-US>* </span><span
+lang=EN-US style='color:#010001'>pGeo</span><span lang=EN-US> = &amp;</span><span
+lang=EN-US style='color:#010001'>m_pGeo</span><span lang=EN-US>[</span><span
+lang=EN-US style='color:#010001'>i</span><span lang=EN-US>];</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>D3DXMATRIX </span><span lang=EN-US
+style='color:#010001'>mtPrn</span><span lang=EN-US>(</span><span lang=EN-US
+style='color:red'>1</span><span lang=EN-US>,</span><span lang=EN-US
+style='color:red'>0</span><span lang=EN-US>,</span><span lang=EN-US
+style='color:red'>0</span><span lang=EN-US>,</span><span lang=EN-US
+style='color:red'>0</span><span lang=EN-US>,&nbsp;&nbsp; </span><span
+lang=EN-US style='color:red'>0</span><span lang=EN-US>,</span><span lang=EN-US
+style='color:red'>1</span><span lang=EN-US>,</span><span lang=EN-US
+style='color:red'>0</span><span lang=EN-US>,</span><span lang=EN-US
+style='color:red'>0</span><span lang=EN-US>,&nbsp;&nbsp; </span><span
+lang=EN-US style='color:red'>0</span><span lang=EN-US>,</span><span lang=EN-US
+style='color:red'>0</span><span lang=EN-US>,</span><span lang=EN-US
+style='color:red'>1</span><span lang=EN-US>,</span><span lang=EN-US
+style='color:red'>0</span><span lang=EN-US>,&nbsp;&nbsp; </span><span
+lang=EN-US style='color:red'>0</span><span lang=EN-US>,</span><span lang=EN-US
+style='color:red'>0</span><span lang=EN-US>,</span><span lang=EN-US
+style='color:red'>0</span><span lang=EN-US>,</span><span lang=EN-US
+style='color:red'>1</span><span lang=EN-US>);</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:green'>// </span><span style='color:green'>자신의 지역행렬 계산</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>this</span><span lang=EN-US>-&gt;</span><span
+lang=EN-US style='color:#880000'>GetAniTrack</span><span lang=EN-US>(&amp;</span><span
+lang=EN-US style='color:#010001'>pGeo</span><span lang=EN-US>-&gt;</span><span
+lang=EN-US style='color:#010001'>mtL</span><span lang=EN-US>, </span><span
+lang=EN-US style='color:#010001'>i</span><span lang=EN-US>, </span><span
+lang=EN-US style='color:#010001'>m_nFrmC</span><span lang=EN-US>);</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:blue'>if</span><span lang=EN-US>(</span><span
+lang=EN-US style='color:#010001'>pGeo</span><span lang=EN-US>-&gt;</span><span
+lang=EN-US style='color:#010001'>pGeoPrn</span><span lang=EN-US>)</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:#010001'>mtPrn</span><span lang=EN-US>&nbsp;&nbsp; = </span><span
+lang=EN-US style='color:#010001'>pGeo</span><span lang=EN-US>-&gt;</span><span
+lang=EN-US style='color:#010001'>pGeoPrn</span><span lang=EN-US>-&gt;</span><span
+lang=EN-US style='color:#010001'>mtW</span><span lang=EN-US>;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:green'>// </span><span style='color:green'>자신의 월드행렬<span
+lang=EN-US> = </span>자신의 지역행렬<span lang=EN-US> * </span>부모 월드행렬</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+lang=EN-US style='color:#010001'>pGeo</span><span lang=EN-US>-&gt;</span><span
+lang=EN-US style='color:#010001'>mtW</span><span lang=EN-US> = </span><span
+lang=EN-US style='color:#010001'>pGeo</span><span lang=EN-US>-&gt;</span><span
+lang=EN-US style='color:#010001'>mtL</span><span lang=EN-US> * </span><span
+lang=EN-US style='color:#010001'>mtPrn</span><span lang=EN-US>;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>…</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US><img border=0 width=268 height=189
+src="bs27_ani.files/image017.jpg"></span></p>
+
+<p class=MsoNormal><span lang=EN-US>&lt;</span>계층 애니메이션<span lang=EN-US>: <a
+href="https://github.com/3dapi/bs27_ani/raw/master/asa25_hierarchic.zip">asa25_hierarchic.zip</a>&gt;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US style='font-size:14.0pt'>2.5 Interpolation
+Animation</span></p>
+
+<p class=MsoNormal>애니메이션 프레임 간격이 작으면 프로그램 구현이 쉬우나 상대적으로 필요한 메모리가 커집니다<span
+lang=EN-US>. </span>애니메이션의 종류가 많아질 수록 기하 급수적으로 필요한 메모리가 늘어나게 되는데 눈으로 봤을 때 거의 차이가
+없어 보이고 연산이 늘어나도 렌더링에 거의 영향을 주지 않는다면 메모리를 아끼는 것이 좋을 수도 있습니다<span lang=EN-US>.</span></p>
+
+<p class=MsoNormal>애니메이션 데이터의 보간<span lang=EN-US>(Interpolation)</span>은 렌더링 스피드를
+유지한 채 좀 더 다양한 애니메이션을 구현하기 위해서 프레임 수를 줄이고 대신 이들 중간을 계산하는 작업입니다<span lang=EN-US>.</span></p>
+
+<p class=MsoNormal>예를 들어서 그림과 같이 <span lang=EN-US>ASE</span>에 저장된<span
+lang=EN-US> n </span>프레임<span lang=EN-US>(0.5</span>초<span lang=EN-US>)</span>과<span
+lang=EN-US> n+1 </span>프레임<span lang=EN-US>(1.5</span>초<span lang=EN-US>) </span>사이에
+현재 애니메이션 타임<span lang=EN-US>(1.25 </span>초<span lang=EN-US>) </span>대한 행렬들을 구한다고
+생각해 봅시다<span lang=EN-US>. </span>만약<span lang=EN-US> n</span>과<span lang=EN-US>
+n+1</span>의 시간 간격이 작으면 그냥<span lang=EN-US> n </span>또는<span lang=EN-US> n+1 </span>프레임에
+저장된 행렬을 사용하면 되지만 지금의 예처럼 어느 정도 시간이 있다면 두 프레임<span lang=EN-US>(n, n+1)</span>을 사용해서<span
+lang=EN-US> 1.25</span>초에 대한 행렬들을 계산해야 합니다<span lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US><img border=0 width=528 height=156
+src="bs27_ani.files/image018.png"></span></p>
+
+<p class=MsoNormal><span lang=EN-US>&lt;</span>프레임과 비중 값<span lang=EN-US>(Weight)&gt;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal>가장 유연한 방법은 선형 보간입니다<span lang=EN-US>. </span>물론 베지어<span
+lang=EN-US>, </span>에르미트 보간을 사용해도 되는데 이들은<span lang=EN-US> 3</span>차 방정식을 사용하고 있습니다<span
+lang=EN-US>. </span>그런데 선형 보간은<span lang=EN-US> 1</span>차 방정식이라 계산 방법이 무척 쉽고<span
+lang=EN-US>, </span>렌더링 속도에도 거의 영향이 없습니다<span lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal>알려진 두 개의 값<span lang=EN-US> V0, V1 </span>사이에 비중 값<span
+lang=EN-US>(Weight)</span>이 주어진 선형 보간 수식은 두 점이 주어진 직선의 방정식과 동일합니다<span
+lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>V' = (1 &#8211; w) * V0 + w * V1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span>또는</p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp; = V0 + w * (V1 -
+V0)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;- </span>직선의 방정식</p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal>앞의 그림에서 선형 보간에서 비중 값<span lang=EN-US>(w)</span>은 시간으로 정해진다고 할
+때 두 프레임의 시간과 현재의 시간을 가지고 계산이 됩니다<span lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>w = (</span>현재 프레임 시간 <span lang=EN-US>&#8211; </span>현재
+프레임보다 작거나 같은 프레임 시간<span lang=EN-US>) /</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp;&nbsp; (</span>현재 프레임보다 작거나 같은 프레임
+시간<span lang=EN-US> - </span>다음 프레임 시간<span lang=EN-US>)</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp; = (1.25 - 0.5)/(1.5 - 0.5) = 0.75</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal>그림과 다르게 시간 대신 프레임 인덱스를 사용하더라도<span lang=EN-US> w</span>값은 동일한
+방식으로 계산이 됩니다<span lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>w = (</span>현재 프레임 <span lang=EN-US>&#8211; </span>현재
+프레임보다 작거나 같은 프레임<span lang=EN-US>) /</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;&nbsp;&nbsp; (</span>현재 프레임보다 작거나 같은 프레임<span
+lang=EN-US> - </span>다음 프레임<span lang=EN-US>)</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal>앞서 우리가 해석한<span lang=EN-US> ASE</span>는 시간 대신 프레임 인덱스를 사용하고 있는데
+위치에 대한<span lang=EN-US> w </span>값<span lang=EN-US>, </span>보간한 위치<span
+lang=EN-US>, </span>그리고 애니메이션 행렬을 간단히 구현할 수 있습니다<span lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:blue'>FLOAT </span><span lang=EN-US>w = </span><span lang=EN-US
+style='color:blue'>FLOAT</span><span lang=EN-US>(nFrame-
+pGeo-&gt;vTrs[i].nF)/(pGeo-&gt;vTrs[i+</span><span lang=EN-US style='color:
+red'>1</span><span lang=EN-US>].nF- pGeo-&gt;vTrs[i].nF);</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>p = p1&nbsp; +
+w * (p2-p1);</span></p>
+
+<p class=MsoNormal><span lang=EN-US>mtA._41 = p.x; mtA._42 = p.y; mtA._43 =
+p.z;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal>회전에서도 비슷하게 적용할 수 있습니다<span lang=EN-US>. </span>먼저<span
+lang=EN-US> w </span>계산입니다<span lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US style='color:blue'>FLOAT</span><span
+lang=EN-US>&nbsp;&nbsp; w = </span><span lang=EN-US style='color:blue'>FLOAT</span><span
+lang=EN-US>(nFrame - pGeo-&gt;vRot[i].nF)/(pGeo-&gt;vRot[i+</span><span
+lang=EN-US style='color:red'>1</span><span lang=EN-US>].nF-
+pGeo-&gt;vRot[i].nF);</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal>사원수에 대한 보간은<span lang=EN-US> sin </span>θ를 포함한 수식을 사용합니다<span
+lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US><span style='position:relative;top:12.0pt'><img
+border=0 width=236 height=41 src="bs27_ani.files/image019.png"></span></span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal>이 수식은<span lang=EN-US> D3DXQuaternionSlerp() </span>등으로 구현되어
+있습니다<span lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:#880000'>D3DXQuaternionSlerp</span><span lang=EN-US>(&amp;q,
+&amp;q1, &amp;q2, w);</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal>만약 두 프레임 사이의 각도가 작고 덧셈<span lang=EN-US>('+') </span>연산자<span
+lang=EN-US>, </span>곱셈<span lang=EN-US>('*') </span>연산자가 정의된 <span lang=EN-US>DirectX</span>의
+<span lang=EN-US>D3DXQUATERNION </span>객체를 사용한다면 선형 보간처럼 사용할 수 있습니다<span
+lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>q = q1&nbsp; + w * (q2-q1);</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal>보간된 사원수에서 <span lang=EN-US>D3DXMatrixRotationQuaternion() </span>등과
+같은 함수를 사용해서 행렬을 얻는다면 회전에 대한 보간은 완료가 됩니다<span lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US style='color:#880000'>D3DXMatrixRotationQuaternion</span><span
+lang=EN-US>(&amp;mtA, &amp;q);</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US style='color:green'>// </span><span
+style='color:green'>선형 보간을 사용하는 애니메이션 트랙</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:blue'>INT</span><span lang=EN-US> </span><span lang=EN-US
+style='color:blue'>CLcAse</span><span lang=EN-US>::</span><span lang=EN-US
+style='color:#880000'>GetAniTrack</span><span lang=EN-US>(</span><span
+lang=EN-US style='color:blue'>void</span><span lang=EN-US>* </span><span
+lang=EN-US style='color:#010001'>mtOut</span><span lang=EN-US>, </span><span
+lang=EN-US style='color:blue'>INT</span><span lang=EN-US> </span><span
+lang=EN-US style='color:#010001'>nGeo</span><span lang=EN-US>, </span><span
+lang=EN-US style='color:blue'>INT</span><span lang=EN-US> </span><span
+lang=EN-US style='color:#010001'>nFrame</span><span lang=EN-US>)</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>…</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:green'>// Rotation</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:blue'>D3DXQUATERNION</span><span lang=EN-US> </span><span
+lang=EN-US style='color:#010001'>q</span><span lang=EN-US>;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:#010001'>q1</span><span lang=EN-US> = (</span><span lang=EN-US
+style='color:blue'>D3DXQUATERNION</span><span lang=EN-US>*)&amp;</span><span
+lang=EN-US style='color:#010001'>pGeo</span><span lang=EN-US>-&gt;</span><span
+lang=EN-US style='color:#010001'>vRot</span><span lang=EN-US>[</span><span
+lang=EN-US style='color:#010001'>i</span><span lang=EN-US>];</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:#010001'>q2</span><span lang=EN-US> = (</span><span lang=EN-US
+style='color:blue'>D3DXQUATERNION</span><span lang=EN-US>*)&amp;</span><span
+lang=EN-US style='color:#010001'>pGeo</span><span lang=EN-US>-&gt;</span><span
+lang=EN-US style='color:#010001'>vRot</span><span lang=EN-US>[</span><span
+lang=EN-US style='color:#010001'>i</span><span lang=EN-US>+</span><span
+lang=EN-US style='color:red'>1</span><span lang=EN-US>];</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:blue'>FLOAT</span><span lang=EN-US>&nbsp;&nbsp; </span><span
+lang=EN-US style='color:#010001'>w</span><span lang=EN-US> = </span><span
+lang=EN-US style='color:blue'>FLOAT</span><span lang=EN-US>(</span><span
+lang=EN-US style='color:#010001'>nFrame</span><span lang=EN-US> - </span><span
+lang=EN-US style='color:#010001'>pGeo</span><span lang=EN-US>-&gt;</span><span
+lang=EN-US style='color:#010001'>vRot</span><span lang=EN-US>[</span><span
+lang=EN-US style='color:#010001'>i</span><span lang=EN-US>].</span><span
+lang=EN-US style='color:#010001'>nF</span><span lang=EN-US>)/(</span><span
+lang=EN-US style='color:#010001'>pGeo</span><span lang=EN-US>-&gt;</span><span
+lang=EN-US style='color:#010001'>vRot</span><span lang=EN-US>[</span><span
+lang=EN-US style='color:#010001'>i</span><span lang=EN-US>+</span><span
+lang=EN-US style='color:red'>1</span><span lang=EN-US>].</span><span
+lang=EN-US style='color:#010001'>nF</span><span lang=EN-US>- </span><span
+lang=EN-US style='color:#010001'>pGeo</span><span lang=EN-US>-&gt;</span><span
+lang=EN-US style='color:#010001'>vRot</span><span lang=EN-US>[</span><span
+lang=EN-US style='color:#010001'>i</span><span lang=EN-US>].</span><span
+lang=EN-US style='color:#010001'>nF</span><span lang=EN-US>);</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:#880000'>D3DXQuaternionSlerp</span><span lang=EN-US>(&amp;</span><span
+lang=EN-US style='color:#010001'>q</span><span lang=EN-US>, </span><span
+lang=EN-US style='color:#010001'>q1</span><span lang=EN-US>, </span><span
+lang=EN-US style='color:#010001'>q2</span><span lang=EN-US>, </span><span
+lang=EN-US style='color:#010001'>w</span><span lang=EN-US>);</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:#880000'>D3DXMatrixRotationQuaternion</span><span lang=EN-US>(&amp;</span><span
+lang=EN-US style='color:#010001'>mtA</span><span lang=EN-US>, &amp;</span><span
+lang=EN-US style='color:#010001'>q</span><span lang=EN-US>);</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>//</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:blue'>D3DXVECTOR3</span><span lang=EN-US> </span><span lang=EN-US
+style='color:#010001'>p</span><span lang=EN-US>;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:#010001'>p1</span><span lang=EN-US> = (</span><span lang=EN-US
+style='color:blue'>D3DXVECTOR3</span><span lang=EN-US>*)&amp;</span><span
+lang=EN-US style='color:#010001'>pGeo</span><span lang=EN-US>-&gt;</span><span
+lang=EN-US style='color:#010001'>vTrs</span><span lang=EN-US>[</span><span
+lang=EN-US style='color:#010001'>i</span><span lang=EN-US>&nbsp; ];</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:#010001'>p2</span><span lang=EN-US> = (</span><span lang=EN-US
+style='color:blue'>D3DXVECTOR3</span><span lang=EN-US>*)&amp;</span><span
+lang=EN-US style='color:#010001'>pGeo</span><span lang=EN-US>-&gt;</span><span
+lang=EN-US style='color:#010001'>vTrs</span><span lang=EN-US>[</span><span
+lang=EN-US style='color:#010001'>i</span><span lang=EN-US>+</span><span
+lang=EN-US style='color:red'>1</span><span lang=EN-US>];</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:blue'>FLOAT</span><span lang=EN-US>&nbsp;&nbsp; </span><span
+lang=EN-US style='color:#010001'>w</span><span lang=EN-US> = </span><span
+lang=EN-US style='color:blue'>FLOAT</span><span lang=EN-US>(</span><span
+lang=EN-US style='color:#010001'>nFrame</span><span lang=EN-US>- </span><span
+lang=EN-US style='color:#010001'>pGeo</span><span lang=EN-US>-&gt;</span><span
+lang=EN-US style='color:#010001'>vTrs</span><span lang=EN-US>[</span><span
+lang=EN-US style='color:#010001'>i</span><span lang=EN-US>].</span><span
+lang=EN-US style='color:#010001'>nF</span><span lang=EN-US>)/(</span><span
+lang=EN-US style='color:#010001'>pGeo</span><span lang=EN-US>-&gt;</span><span
+lang=EN-US style='color:#010001'>vTrs</span><span lang=EN-US>[</span><span
+lang=EN-US style='color:#010001'>i</span><span lang=EN-US>+</span><span
+lang=EN-US style='color:red'>1</span><span lang=EN-US>].</span><span
+lang=EN-US style='color:#010001'>nF</span><span lang=EN-US>- </span><span
+lang=EN-US style='color:#010001'>pGeo</span><span lang=EN-US>-&gt;</span><span
+lang=EN-US style='color:#010001'>vTrs</span><span lang=EN-US>[</span><span
+lang=EN-US style='color:#010001'>i</span><span lang=EN-US>].</span><span
+lang=EN-US style='color:#010001'>nF</span><span lang=EN-US>);</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:#010001'>p</span><span lang=EN-US> = *</span><span lang=EN-US
+style='color:#010001'>p1</span><span lang=EN-US>&nbsp; + </span><span
+lang=EN-US style='color:#010001'>w</span><span lang=EN-US> * (*</span><span
+lang=EN-US style='color:#010001'>p2</span><span lang=EN-US> - *</span><span
+lang=EN-US style='color:#010001'>p1</span><span lang=EN-US>);</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US
+style='color:#010001'>mtA</span><span lang=EN-US>.</span><span lang=EN-US
+style='color:#010001'>_41</span><span lang=EN-US> = </span><span lang=EN-US
+style='color:#010001'>p</span><span lang=EN-US>.</span><span lang=EN-US
+style='color:#010001'>x</span><span lang=EN-US>; </span><span lang=EN-US
+style='color:#010001'>mtA</span><span lang=EN-US>.</span><span lang=EN-US
+style='color:#010001'>_42</span><span lang=EN-US> = </span><span lang=EN-US
+style='color:#010001'>p</span><span lang=EN-US>.</span><span lang=EN-US
+style='color:#010001'>y</span><span lang=EN-US>; </span><span lang=EN-US
+style='color:#010001'>mtA</span><span lang=EN-US>.</span><span lang=EN-US
+style='color:#010001'>_43</span><span lang=EN-US> = </span><span lang=EN-US
+style='color:#010001'>p</span><span lang=EN-US>.</span><span lang=EN-US
+style='color:#010001'>z</span><span lang=EN-US>;</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US>…</span></p>
+
+<p class=MsoNormal style='word-break:keep-all'><span lang=EN-US><img border=0
+width=267 height=189 src="bs27_ani.files/image020.jpg"></span></p>
+
+<p class=MsoNormal><span lang=EN-US><a
+href="https://github.com/3dapi/bs27_ani/raw/master/asa26_interpolation.zip"><span
+style='color:windowtext;text-decoration:none'>&nbsp;</span>asa26_interpolation.zip</a></span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>ASE </span>파일의 애니메이션에 대한 중요 부부의 설명은 모두 끝이 났습니다<span
+lang=EN-US>. </span>좀 더 확실한 학습은 스스로가 직접 하나하나 구현해 보는 것이 가장 좋습니다<span lang=EN-US>.
+</span>중요한 내용을 몇 가지 정리한다면 다음과 같습니다<span lang=EN-US>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US style='color:blue'>1) </span><span
+style='color:blue'>위치를<span lang=EN-US> x, z, y</span>로 해석한다<span lang=EN-US>.</span></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='color:blue'>2) </span><span
+style='color:blue'>위치에 대한 삼각형 인덱스는<span lang=EN-US> a, c, b </span>이다<span
+lang=EN-US>.</span></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='color:blue'>3) </span><span
+style='color:blue'>텍스처 좌표는<span lang=EN-US> u, 1.0f &#8211; v </span>이다<span
+lang=EN-US>.</span></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='color:blue'>4) </span><span
+style='color:blue'>텍스처 좌표 인덱스는<span lang=EN-US> a, c, b </span>이다<span
+lang=EN-US>.</span></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='color:blue'>5) </span><span
+style='color:blue'>위치는 텍스처 좌표보다 같거나 작다<span lang=EN-US>.</span></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='color:blue'>6) </span><span
+style='color:blue'>텍스처 좌표 인덱스와 위치 인덱스 수는 같다<span lang=EN-US>.</span></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='color:blue'>7) </span><span
+style='color:blue'>정점을 구성하려면<span lang=EN-US> k </span>번째 텍스처 좌표 인덱스에서 텍스처 버퍼 번호를
+얻어<span lang=EN-US> uv </span>좌표를 얻고<span lang=EN-US>, k </span>번째 정점 위치 인덱스에서 위치
+버퍼 번호를 얻어 정점 위치를 얻는다<span lang=EN-US>.</span></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='color:blue'>8) TM</span><span
+style='color:blue'>은<span lang=EN-US> 2</span>번째와<span lang=EN-US> 3</span>번째 행을
+교환한 다음<span lang=EN-US>, 2</span>번째 열과<span lang=EN-US> 3</span>번째 열 또한 교환한다<span
+lang=EN-US>.</span></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='color:blue'>9) ASE</span><span
+style='color:blue'>는 월드행렬로 구성되어 있어서 자신의 지역행렬<span lang=EN-US> = (</span>자신의 월드행렬<span
+lang=EN-US>) * (</span>부모의 월드행렬의 역행렬<span lang=EN-US>)</span>로 구한다<span
+lang=EN-US>.</span></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='color:blue'>10) </span><span
+style='color:blue'>지역 좌표계 정점 위치<span lang=EN-US> = (ASE</span>에서 구한 위치<span
+lang=EN-US>) * (</span>지오메트리 월드행렬 역행렬<span lang=EN-US>) </span>이다<span
+lang=EN-US>.</span></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='color:blue'>11) </span><span
+style='color:blue'>애니메이션의 회전 값은 사원수로 저장되어 있으며 누적 값이 아닌 이전 프레임과 상대적인 값이다<span
+lang=EN-US>.</span></span></p>
+
+<p class=MsoNormal><span lang=EN-US style='color:blue'>12) </span><span
+style='color:blue'>회전은 사원수 보간을 이용한다<span lang=EN-US>.</span></span></p>
+
+</div>
+
+</body>
 
 <?php
-	DrawPDF('bs27_ani/bs27_ani.pdf');
-
 	include '../base/lc_tail.php';
 ?>
